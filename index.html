@@ -1,1 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Lolo y la Yaya — La música de Lolo y la Yaya</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@500;600;700;800;900&display=swap');
+
+    :root {
+      --crema: #f5eddd;
+      --crema-claro: #fffaf0;
+      --azul: #14659a;
+      --azul-oscuro: #0b4168;
+      --azul-suave: #d8eaf1;
+      --marron: #593b29;
+      --texto: #263238;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: var(--crema);
+      color: var(--texto);
+      font-family: "Nunito", sans-serif;
+    }
+
+    /* Patrón sutil de fondo */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.32;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(20, 101, 154, 0.18) 1px, transparent 0);
+      background-size: 26px 26px;
+    }
+
+    .contenedor {
+      position: relative;
+      width: min(100%, 720px);
+      margin: 0 auto;
+      padding: 32px 20px 50px;
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 24px 10px 32px;
+    }
+
+    .estrella {
+      display: block;
+      color: var(--azul);
+      font-size: 24px;
+      margin-bottom: 14px;
+      animation: brillo 3s ease-in-out infinite;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--azul-oscuro);
+      font-size: clamp(42px, 12vw, 72px);
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 0 transparent,
+        0 0 16px rgba(20, 101, 154, 0.12);
+      animation: brillo-titulo 4s ease-in-out infinite;
+    }
+
+    .subtitulo {
+      margin: 16px 0 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--marron);
+    }
+
+    .separador {
+      width: 58px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--azul);
+      margin: 24px auto;
+    }
+
+    /* Espacio reservado para Lolo */
+
+    .lolo {
+      width: min(100%, 300px);
+      margin: 8px auto 0;
+      display: block;
+      filter: drop-shadow(0 14px 12px rgba(62, 42, 25, 0.16));
+    }
+
+    /* CANCIONES */
+
+    .canciones {
+      margin-top: 26px;
+    }
+
+    .titulo-seccion {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .titulo-seccion::before,
+    .titulo-seccion::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: rgba(11, 65, 104, 0.25);
+    }
+
+    .titulo-seccion span {
+      color: var(--azul-oscuro);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .lista {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cancion {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 72px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--texto);
+      background: rgba(255, 250, 240, 0.72);
+      border: 1px solid rgba(11, 65, 104, 0.14);
+      border-radius: 14px;
+      box-shadow: 0 3px 0 rgba(11, 65, 104, 0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .cancion:active {
+      transform: scale(0.985);
+    }
+
+    .numero {
+      flex: 0 0 40px;
+      color: var(--azul);
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .nombre-cancion {
+      flex: 1;
+      padding-right: 10px;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .flecha {
+      flex: 0 0 28px;
+      color: var(--azul);
+      text-align: right;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .cancion:hover {
+      background: var(--crema-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 16px rgba(11, 65, 104, 0.10);
+    }
+
+    /* PIE */
+
+    footer {
+      text-align: center;
+      margin-top: 46px;
+      color: rgba(89, 59, 41, 0.65);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .mini-estrella {
+      color: var(--azul);
+      margin: 0 4px;
+    }
+
+    @keyframes brillo {
+      0%, 100% {
+        opacity: 0.45;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.12);
+      }
+    }
+
+    @keyframes brillo-titulo {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(20, 101, 154, 0.05);
+      }
+
+      50% {
+        text-shadow: 0 0 22px rgba(20, 101, 154, 0.18);
+      }
+    }
+
+    @media (min-width: 700px) {
+
+      .contenedor {
+        padding-top: 48px;
+      }
+
+      .hero {
+        padding-bottom: 44px;
+      }
+
+      .cancion {
+        min-height: 78px;
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .nombre-cancion {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="contenedor">
+
+    <section class="hero">
+
+      <span class="estrella">✦</span>
+
+      <h1>Lolo<br>y la Yaya</h1>
+
+      <p class="subtitulo">
+        La música de Lolo y la Yaya
+      </p>
+
+      <div class="separador"></div>
+
+      <!-- Más adelante subiremos aquí la ilustración de Lolo -->
+      <img
+        class="lolo"
+        src="lolo.png"
+        alt="Lolo, el héroe intergaláctico"
+      >
+
+    </section>
+
+
+    <section class="canciones">
+
+      <div class="titulo-seccion">
+        <span>LAS CANCIONES</span>
+      </div>
+
+      <div class="lista">
+
+        <a class="cancion" href="/por-si-algun-dia/">
+          <span class="numero">01</span>
+          <span class="nombre-cancion">Por si algún día</span>
+          <span class="flecha">›</span>
+        </a>
+
+        <a class="cancion" href="/no-me-aplastes-soy-un-heroe/">
+          <span class="numero">02</span>
+          <span class="nombre-cancion">
+            No me aplastes, soy un héroe
+          </span>
+          <span class="flecha">›</span>
+        </a>
+
+        <a class="cancion" href="/basura-con-estilo/">
+          <span class="numero">03</span>
+          <span class="nombre-cancion">Basura con estilo</span>
+          <span class="flecha">›</span>
+        </a>
+
+        <a class="cancion" href="/molestar-por-la-noche-dormir-todo-el-dia/">
+          <span class="numero">04</span>
+          <span class="nombre-cancion">
+            Molestar por la noche,<br>
+            dormir todo el día
+          </span>
+          <span class="flecha">›</span>
+        </a>
+
+        <a class="cancion" href="/una-espia-intergalactica/">
+          <span class="numero">05</span>
+          <span class="nombre-cancion">
+            Una espía intergaláctica
+          </span>
+          <span class="flecha">›</span>
+        </a>
+
+        <a class="cancion" href="/la-leyenda-de-lolo-y-la-yaya/">
+          <span class="numero">06</span>
+          <span class="nombre-cancion">
+            La leyenda de Lolo y la Yaya
+          </span>
+          <span class="flecha">›</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <footer>
+      <span class="mini-estrella">✦</span>
+      Lolo y la Yaya
+      <span class="mini-estrella">✦</span>
+    </footer>
+
+  </main>
+
+</body>
+</html>
