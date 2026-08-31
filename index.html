@@ -7,16 +7,16 @@
   <title>Lolo y la Yaya — La música de Lolo y la Yaya</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
 
     :root {
       --crema: #f5eddd;
       --crema-claro: #fffaf0;
       --azul: #14659a;
-      --azul-oscuro: #0b4168;
-      --azul-suave: #d8eaf1;
+      --azul-oscuro: #123e63;
+      --dorado: #c89b45;
       --marron: #593b29;
-      --texto: #263238;
+      --texto: #293038;
     }
 
     * {
@@ -30,110 +30,300 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background-color: var(--crema);
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 25%, rgba(255,255,255,.65), transparent 32%),
+        linear-gradient(180deg, #f8f0df 0%, #f2e6d0 100%);
       color: var(--texto);
       font-family: "Nunito", sans-serif;
     }
 
-    /* Patrón sutil de fondo */
+    /* Textura y patrón */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.32;
+      opacity: .48;
       background-image:
-        radial-gradient(circle at 1px 1px, rgba(20, 101, 154, 0.18) 1px, transparent 0);
-      background-size: 26px 26px;
+        radial-gradient(circle at 2px 2px, rgba(18,62,99,.16) 1px, transparent 1.2px),
+        radial-gradient(circle at 18px 18px, rgba(200,155,69,.12) 1px, transparent 1.2px);
+      background-size: 38px 38px;
+    }
+
+    .universo {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .orbita {
+      position: absolute;
+      border: 1px dashed rgba(18,62,99,.18);
+      border-radius: 50%;
+      width: 120vw;
+      height: 34vw;
+      left: -10vw;
+      top: 8vh;
+      transform: rotate(-9deg);
+    }
+
+    .orbita.dos {
+      width: 110vw;
+      height: 28vw;
+      top: 72vh;
+      left: 5vw;
+      transform: rotate(12deg);
+      opacity: .65;
+    }
+
+    .estrella-fondo {
+      position: absolute;
+      color: var(--azul);
+      opacity: .65;
+      animation: destello 4s ease-in-out infinite;
+    }
+
+    .e1 { top: 7%; left: 10%; font-size: 16px; }
+    .e2 { top: 16%; right: 11%; font-size: 10px; animation-delay: 1s; }
+    .e3 { top: 36%; left: 7%; font-size: 12px; animation-delay: 2s; }
+    .e4 { top: 55%; right: 8%; font-size: 15px; animation-delay: .6s; }
+    .e5 { top: 77%; left: 13%; font-size: 10px; animation-delay: 2.5s; }
+    .e6 { top: 90%; right: 14%; font-size: 18px; animation-delay: 1.7s; }
+
+    .fugaz {
+      position: absolute;
+      width: 105px;
+      height: 2px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, transparent, rgba(20,101,154,.05), rgba(20,101,154,.8));
+      transform: rotate(-42deg);
+      opacity: 0;
+      filter: drop-shadow(0 0 5px rgba(20,101,154,.35));
+      animation: estrellaFugaz 14s linear infinite;
+    }
+
+    .fugaz::after {
+      content: "✦";
+      position: absolute;
+      right: -5px;
+      top: -9px;
+      color: var(--azul);
+      font-size: 15px;
+    }
+
+    .f1 {
+      top: 13%;
+      left: 4%;
+    }
+
+    .f2 {
+      top: 67%;
+      right: 4%;
+      animation-delay: 7s;
+    }
+
+    @keyframes estrellaFugaz {
+      0%, 10% {
+        opacity: 0;
+        transform: translateX(0) translateY(0) rotate(-42deg);
+      }
+      12% {
+        opacity: .9;
+      }
+      20% {
+        opacity: 0;
+        transform: translateX(240px) translateY(160px) rotate(-42deg);
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes destello {
+      0%, 100% {
+        opacity: .25;
+        transform: scale(.8);
+      }
+      50% {
+        opacity: .95;
+        transform: scale(1.25);
+      }
     }
 
     .contenedor {
       position: relative;
+      z-index: 1;
       width: min(100%, 720px);
       margin: 0 auto;
-      padding: 32px 20px 50px;
+      padding: 30px 20px 48px;
     }
 
     /* HERO */
 
     .hero {
       text-align: center;
-      padding: 24px 10px 32px;
-    }
-
-    .estrella {
-      display: block;
-      color: var(--azul);
-      font-size: 24px;
-      margin-bottom: 14px;
-      animation: brillo 3s ease-in-out infinite;
+      padding: 18px 0 24px;
     }
 
     h1 {
       margin: 0;
       color: var(--azul-oscuro);
-      font-size: clamp(42px, 12vw, 72px);
-      line-height: 0.9;
+      font-size: clamp(34px, 8vw, 56px);
+      line-height: 1;
       font-weight: 900;
-      letter-spacing: -2px;
+      letter-spacing: -1.8px;
       text-transform: uppercase;
-      text-shadow:
-        0 0 0 transparent,
-        0 0 16px rgba(20, 101, 154, 0.12);
-      animation: brillo-titulo 4s ease-in-out infinite;
+      white-space: nowrap;
+      transform: perspective(400px) rotateX(7deg);
+      text-shadow: 0 0 20px rgba(20,101,154,.08);
     }
 
     .subtitulo {
-      margin: 16px 0 0;
-      font-size: 18px;
-      font-weight: 700;
+      margin: 14px 0 0;
       color: var(--marron);
+      font-size: 17px;
+      font-weight: 700;
     }
 
     .separador {
-      width: 58px;
-      height: 4px;
-      border-radius: 99px;
-      background: var(--azul);
-      margin: 24px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      margin: 18px auto 18px;
+      color: var(--azul);
     }
 
-    /* Espacio reservado para Lolo */
+    .separador::before,
+    .separador::after {
+      content: "";
+      width: 52px;
+      height: 1px;
+      background: var(--azul);
+      opacity: .6;
+    }
+
+    /* LOLO */
+
+    .lolo-wrap {
+      position: relative;
+      width: min(100%, 240px);
+      margin: 0 auto;
+    }
 
     .lolo {
-      width: min(100%, 300px);
-      margin: 8px auto 0;
+      width: 100%;
       display: block;
-      filter: drop-shadow(0 14px 12px rgba(62, 42, 25, 0.16));
+      filter: drop-shadow(0 12px 10px rgba(62,42,25,.16));
+    }
+
+    /*
+      Efecto visual de parpadeo.
+      El círculo crema cubre momentáneamente uno de los ojos.
+    */
+
+    .parpado {
+      position: absolute;
+      width: 30px;
+      height: 20px;
+      background: #8c5a33;
+      border-radius: 50%;
+      left: 35%;
+      top: 20%;
+      transform-origin: center top;
+      transform: scaleY(0);
+      animation: parpadeo 9s infinite;
+      z-index: 2;
+    }
+
+    @keyframes parpadeo {
+      0%, 46%, 49%, 100% {
+        transform: scaleY(0);
+      }
+      47%, 48% {
+        transform: scaleY(1);
+      }
+    }
+
+    /* BARRACAS DECORATIVAS */
+
+    .barraca {
+      position: absolute;
+      width: 78px;
+      height: 54px;
+      opacity: .28;
+      border: 2px solid var(--dorado);
+      border-top: none;
+      bottom: 25%;
+      z-index: -1;
+    }
+
+    .barraca::before {
+      content: "";
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      border-left: 2px solid var(--dorado);
+      border-top: 2px solid var(--dorado);
+      transform: rotate(45deg);
+      top: -34px;
+      left: 6px;
+    }
+
+    .barraca::after {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 25px;
+      border: 2px solid var(--dorado);
+      border-bottom: none;
+      bottom: 0;
+      left: 29px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .barraca.izq {
+      left: -30px;
+      top: 300px;
+      transform: scale(.72);
+    }
+
+    .barraca.der {
+      right: -30px;
+      top: 390px;
+      transform: scale(.58);
     }
 
     /* CANCIONES */
 
     .canciones {
-      margin-top: 26px;
+      margin-top: 14px;
     }
 
     .titulo-seccion {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
+      justify-content: center;
+      gap: 13px;
+      margin-bottom: 16px;
     }
 
     .titulo-seccion::before,
     .titulo-seccion::after {
       content: "";
-      height: 1px;
-      flex: 1;
-      background: rgba(11, 65, 104, 0.25);
+      width: 55px;
+      border-top: 1px dotted rgba(18,62,99,.55);
     }
 
     .titulo-seccion span {
       color: var(--azul-oscuro);
       font-family: "DM Mono", monospace;
       font-size: 13px;
-      letter-spacing: 1.5px;
       font-weight: 500;
+      letter-spacing: 2px;
       white-space: nowrap;
     }
 
@@ -147,106 +337,84 @@
       display: flex;
       align-items: center;
       width: 100%;
-      min-height: 72px;
-      padding: 14px 16px;
+      min-height: 68px;
+      padding: 13px 16px;
       text-decoration: none;
       color: var(--texto);
-      background: rgba(255, 250, 240, 0.72);
-      border: 1px solid rgba(11, 65, 104, 0.14);
-      border-radius: 14px;
-      box-shadow: 0 3px 0 rgba(11, 65, 104, 0.06);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      background: rgba(255,250,240,.63);
+      border: 1px solid rgba(18,62,99,.18);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(83,62,35,.06);
+      backdrop-filter: blur(3px);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .cancion:hover {
+      transform: translateY(-2px);
+      background: rgba(255,253,247,.88);
+      box-shadow: 0 9px 22px rgba(18,62,99,.10);
     }
 
     .cancion:active {
-      transform: scale(0.985);
+      transform: scale(.985);
     }
 
     .numero {
-      flex: 0 0 40px;
+      flex: 0 0 42px;
       color: var(--azul);
       font-family: "DM Mono", monospace;
       font-size: 13px;
-      font-weight: 500;
     }
 
     .nombre-cancion {
       flex: 1;
-      padding-right: 10px;
+      padding-right: 8px;
       font-size: 17px;
-      line-height: 1.2;
+      line-height: 1.25;
       font-weight: 800;
     }
 
     .flecha {
-      flex: 0 0 28px;
+      flex: 0 0 24px;
       color: var(--azul);
+      font-size: 26px;
       text-align: right;
-      font-size: 24px;
-      font-weight: 500;
     }
-
-    .cancion:hover {
-      background: var(--crema-claro);
-      transform: translateY(-2px);
-      box-shadow: 0 7px 16px rgba(11, 65, 104, 0.10);
-    }
-
-    /* PIE */
 
     footer {
+      margin-top: 42px;
       text-align: center;
-      margin-top: 46px;
-      color: rgba(89, 59, 41, 0.65);
-      font-size: 13px;
+      color: var(--marron);
+      font-size: 14px;
       font-weight: 700;
     }
 
-    .mini-estrella {
+    footer span {
       color: var(--azul);
-      margin: 0 4px;
+      margin: 0 7px;
     }
 
-    @keyframes brillo {
-      0%, 100% {
-        opacity: 0.45;
-        transform: scale(0.9);
+    @media (max-width: 430px) {
+      h1 {
+        font-size: clamp(31px, 9vw, 40px);
+        letter-spacing: -1.5px;
       }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.12);
-      }
-    }
-
-    @keyframes brillo-titulo {
-      0%, 100% {
-        text-shadow: 0 0 10px rgba(20, 101, 154, 0.05);
-      }
-
-      50% {
-        text-shadow: 0 0 22px rgba(20, 101, 154, 0.18);
-      }
-    }
-
-    @media (min-width: 700px) {
 
       .contenedor {
-        padding-top: 48px;
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
-      .hero {
-        padding-bottom: 44px;
+      .lolo-wrap {
+        width: 215px;
       }
 
-      .cancion {
-        min-height: 78px;
-        padding-left: 22px;
-        padding-right: 22px;
+      .barraca.izq {
+        left: -43px;
       }
 
-      .nombre-cancion {
-        font-size: 18px;
+      .barraca.der {
+        right: -43px;
       }
     }
   </style>
@@ -254,29 +422,44 @@
 
 <body>
 
+  <div class="universo">
+    <div class="orbita"></div>
+    <div class="orbita dos"></div>
+
+    <span class="estrella-fondo e1">✦</span>
+    <span class="estrella-fondo e2">✦</span>
+    <span class="estrella-fondo e3">✦</span>
+    <span class="estrella-fondo e4">✦</span>
+    <span class="estrella-fondo e5">✦</span>
+    <span class="estrella-fondo e6">✦</span>
+
+    <div class="fugaz f1"></div>
+    <div class="fugaz f2"></div>
+  </div>
+
   <main class="contenedor">
+
+    <div class="barraca izq"></div>
+    <div class="barraca der"></div>
 
     <section class="hero">
 
-      <span class="estrella">✦</span>
+      <h1>Lolo y la Yaya</h1>
 
-      <h1>Lolo<br>y la Yaya</h1>
+      <p class="subtitulo">La música de Lolo y la Yaya</p>
 
-      <p class="subtitulo">
-        La música de Lolo y la Yaya
-      </p>
+      <div class="separador">✦</div>
 
-      <div class="separador"></div>
-
-      <!-- Más adelante subiremos aquí la ilustración de Lolo -->
-      <img
-        class="lolo"
-        src="lolo.png"
-        alt="Lolo, el héroe intergaláctico"
-      >
+      <div class="lolo-wrap">
+        <img
+          class="lolo"
+          src="lolo.png"
+          alt="Lolo, héroe intergaláctico"
+        >
+        <div class="parpado"></div>
+      </div>
 
     </section>
-
 
     <section class="canciones">
 
@@ -294,9 +477,7 @@
 
         <a class="cancion" href="/no-me-aplastes-soy-un-heroe/">
           <span class="numero">02</span>
-          <span class="nombre-cancion">
-            No me aplastes, soy un héroe
-          </span>
+          <span class="nombre-cancion">No me aplastes, soy un héroe</span>
           <span class="flecha">›</span>
         </a>
 
@@ -308,26 +489,19 @@
 
         <a class="cancion" href="/molestar-por-la-noche-dormir-todo-el-dia/">
           <span class="numero">04</span>
-          <span class="nombre-cancion">
-            Molestar por la noche,<br>
-            dormir todo el día
-          </span>
+          <span class="nombre-cancion">Molestar por la noche, dormir todo el día</span>
           <span class="flecha">›</span>
         </a>
 
         <a class="cancion" href="/una-espia-intergalactica/">
           <span class="numero">05</span>
-          <span class="nombre-cancion">
-            Una espía intergaláctica
-          </span>
+          <span class="nombre-cancion">Una espía intergaláctica</span>
           <span class="flecha">›</span>
         </a>
 
         <a class="cancion" href="/la-leyenda-de-lolo-y-la-yaya/">
           <span class="numero">06</span>
-          <span class="nombre-cancion">
-            La leyenda de Lolo y la Yaya
-          </span>
+          <span class="nombre-cancion">La leyenda de Lolo y la Yaya</span>
           <span class="flecha">›</span>
         </a>
 
@@ -335,11 +509,10 @@
 
     </section>
 
-
     <footer>
-      <span class="mini-estrella">✦</span>
+      <span>✦</span>
       Lolo y la Yaya
-      <span class="mini-estrella">✦</span>
+      <span>✦</span>
     </footer>
 
   </main>
