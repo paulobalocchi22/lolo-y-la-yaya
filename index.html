@@ -1,1630 +1,336 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+
+  <!-- Importante para móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<!-- IMPORTANTE: evita problemas de escala y fondos extraños en móvil -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lolo y la Yaya | La música</title>
+
+  <meta name="description" content="La música de Lolo y la Yaya">
+
+  <style>
+    /*
+      FORZAMOS EL MODO CLARO.
+
+      Esto evita que algunos navegadores Android intenten
+      convertir el fondo crema en negro automáticamente.
+    */
+    :root {
+      color-scheme: light only;
+      background: #f6ecd4;
+    }
 
-<meta name="theme-color" content="#f4eddd">
-
-<title>Lolo y la Yaya | La música</title>
-
-<style>
-
-/* =========================================================
-   1. RESET Y VARIABLES
-========================================================= */
-
-:root {
-  color-scheme: light only;
-
-  --crema: #f4eddd;
-  --crema-claro: #fbf7ed;
-  --azul: #183d62;
-  --azul-medio: #2e668f;
-  --azul-claro: #8ba9ba;
-  --texto: #183d62;
-  --marron: #675545;
-  --linea: rgba(24, 61, 98, 0.16);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100%;
-  background: #f4eddd !important;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: #f4eddd !important;
-  color: var(--texto);
-  font-family:
-    "Trebuchet MS",
-    Arial,
-    sans-serif;
-
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
-
-  overflow-x: hidden;
-}
-
-
-/* =========================================================
-   2. FONDO GENERAL
-========================================================= */
-
-.page {
-
-  position: relative;
-  min-height: 100vh;
-
-  background:
-    radial-gradient(
-      circle at 50% 38%,
-      rgba(255,255,255,0.9) 0%,
-      rgba(255,255,255,0.52) 24%,
-      rgba(244,237,221,0.2) 55%,
-      rgba(239,227,201,0.35) 100%
-    ),
-    #f4eddd;
-
-  overflow: hidden;
-}
-
-
-/* =========================================================
-   3. PUNTOS SUTILES DEL FONDO
-========================================================= */
-
-.page::before {
-
-  content: "";
-
-  position: fixed;
-  inset: 0;
-
-  pointer-events: none;
-
-  opacity: 0.48;
-
-  background-image:
-    radial-gradient(circle, rgba(32,72,100,0.28) 1.1px, transparent 1.4px);
-
-  background-size: 55px 55px;
-
-  background-position: 5px 18px;
-
-  z-index: 0;
-}
-
-
-/* =========================================================
-   4. GRANDES LÍNEAS DIAGONALES
-========================================================= */
-
-.background-lines {
-
-  position: absolute;
-  inset: 0;
-
-  z-index: 1;
-  pointer-events: none;
-
-  opacity: 0.52;
-
-  overflow: hidden;
-}
-
-.diagonal {
-
-  position: absolute;
-
-  width: 1px;
-  height: 150vh;
-
-  top: -25vh;
-
-  background:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(45,86,110,0.18) 10%,
-      rgba(45,86,110,0.18) 88%,
-      transparent
-    );
-
-  transform: rotate(27deg);
-
-}
-
-.d1 { left: 8%; }
-.d2 { left: 28%; }
-.d3 { left: 49%; }
-.d4 { left: 70%; }
-.d5 { left: 91%; }
-
-
-/* =========================================================
-   5. LÍNEAS PUNTEADAS DECORATIVAS
-========================================================= */
-
-.dotted-line {
-
-  position: absolute;
-
-  height: 1px;
-
-  border-top:
-    2px dashed rgba(42, 77, 100, 0.22);
-
-  z-index: 2;
-
-  pointer-events: none;
-}
-
-.dotted-top {
-
-  width: 62vw;
-
-  top: 24vh;
-  left: -7vw;
-
-  transform: rotate(-12deg);
-}
-
-.dotted-bottom {
-
-  width: 62vw;
-
-  top: 89vh;
-  right: -9vw;
-
-  transform: rotate(8deg);
-}
-
-
-/* =========================================================
-   6. CONTENIDO PRINCIPAL
-========================================================= */
-
-.content {
-
-  position: relative;
-  z-index: 10;
-
-  width: min(1100px, 100%);
-
-  margin: 0 auto;
-
-  padding:
-    40px
-    25px
-    90px;
-
-  text-align: center;
-}
-
-
-/* =========================================================
-   7. CABECERA
-========================================================= */
-
-.header {
-
-  position: relative;
-
-  width: 100%;
-}
-
-
-/* =========================================================
-   8. TÍTULO CURVADO
-========================================================= */
-
-.title-svg {
-
-  display: block;
-
-  width: min(780px, 94vw);
-
-  height: auto;
-
-  margin:
-    0 auto
-    4px;
-}
-
-.title-svg text {
-
-  font-family:
-    "Arial Rounded MT Bold",
-    "Trebuchet MS",
-    Arial,
-    sans-serif;
-
-  font-weight: 900;
-
-  letter-spacing: 2px;
-
-  fill: #183d62;
-
-  filter:
-    drop-shadow(
-      0 3px 0 rgba(255,255,255,0.35)
-    );
-}
-
-
-/* =========================================================
-   9. SUBTÍTULO
-========================================================= */
-
-.subtitle {
-
-  margin:
-    -3px 0
-    0;
-
-  color: #675545;
-
-  font-size: clamp(19px, 2.1vw, 28px);
-
-  font-weight: 700;
-
-  letter-spacing: 0.4px;
-}
-
-
-/* =========================================================
-   10. ADORNO BAJO SUBTÍTULO
-========================================================= */
-
-.divider {
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 16px;
-
-  width: 100%;
-
-  margin:
-    36px auto
-    25px;
-}
-
-.divider-line {
-
-  width: 110px;
-  height: 2px;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      rgba(43,91,128,0.65)
-    );
-}
-
-.divider-line.right {
-
-  background:
-    linear-gradient(
-      to left,
-      transparent,
-      rgba(43,91,128,0.65)
-    );
-}
-
-.divider-star {
-
-  color: #2e668f;
-
-  font-size: 23px;
-
-  line-height: 1;
-
-  animation: subtlePulse 4s ease-in-out infinite;
-}
-
-
-/* =========================================================
-   11. LOLO
-========================================================= */
-
-.lolo-container {
-
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-
-  margin-top: 40px;
-}
-
-.lolo {
-
-  display: block;
-
-  width: min(310px, 48vw);
-
-  height: auto;
-
-  position: relative;
-
-  z-index: 5;
-
-  filter:
-    drop-shadow(
-      0 16px 14px rgba(35, 43, 48, 0.12)
-    );
-
-}
-
-
-/* =========================================================
-   12. BARRACAS + HIERBAS
-========================================================= */
-
-.landscape {
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-
-  top: 63%;
-
-  height: 300px;
-
-  z-index: 3;
-
-  pointer-events: none;
-}
-
-
-/* ---------------------------------------------------------
-   BARRACA IZQUIERDA
---------------------------------------------------------- */
-
-.barraca {
-
-  position: absolute;
-
-  width: 135px;
-  height: 150px;
-
-  bottom: 0;
-
-  opacity: 0.42;
-}
-
-.barraca.left {
-  left: 15%;
-}
-
-.barraca.right {
-  right: 15%;
-  transform: scaleX(-1);
-}
-
-
-/* Techo */
-
-.roof {
-
-  position: absolute;
-
-  width: 84px;
-  height: 84px;
-
-  left: 25px;
-  top: 7px;
-
-  border-left:
-    2px solid rgba(87,117,91,0.62);
-
-  border-top:
-    2px solid rgba(87,117,91,0.62);
-
-  transform:
-    rotate(45deg)
-    skew(-6deg, -6deg);
-}
-
-
-/* Casa */
-
-.house {
-
-  position: absolute;
-
-  width: 72px;
-  height: 78px;
-
-  left: 31px;
-  top: 50px;
-
-  border-left:
-    2px solid rgba(87,117,91,0.54);
-
-  border-right:
-    2px solid rgba(87,117,91,0.54);
-
-  border-bottom:
-    2px solid rgba(87,117,91,0.54);
-}
-
-
-/* Puerta */
-
-.door {
-
-  position: absolute;
-
-  width: 22px;
-  height: 38px;
-
-  left: 25px;
-  bottom: -1px;
-
-  border:
-    2px solid rgba(87,117,91,0.48);
-
-}
-
-
-/* Líneas del techo */
-
-.roof-lines {
-
-  position: absolute;
-
-  inset: 0;
-}
-
-.roof-lines span {
-
-  position: absolute;
-
-  width: 2px;
-  height: 102px;
-
-  background:
-    rgba(87,117,91,0.3);
-
-  transform-origin: bottom;
-}
-
-.roof-lines span:nth-child(1) {
-  left: 12px;
-  top: 4px;
-  transform: rotate(-22deg);
-}
-
-.roof-lines span:nth-child(2) {
-  left: 34px;
-  top: -5px;
-  transform: rotate(-12deg);
-}
-
-.roof-lines span:nth-child(3) {
-  left: 60px;
-  top: -5px;
-  transform: rotate(2deg);
-}
-
-.roof-lines span:nth-child(4) {
-  left: 87px;
-  top: 4px;
-  transform: rotate(13deg);
-}
-
-
-/* ---------------------------------------------------------
-   HIERBAS
---------------------------------------------------------- */
-
-.grass {
-
-  position: absolute;
-
-  bottom: -2px;
-
-  width: 180px;
-  height: 190px;
-
-  opacity: 0.46;
-}
-
-.grass.left {
-  left: 7%;
-}
-
-.grass.right {
-  right: 7%;
-  transform: scaleX(-1);
-}
-
-.grass span {
-
-  position: absolute;
-
-  bottom: 0;
-
-  width: 2px;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(87,117,91,0.7),
-      rgba(87,117,91,0.12)
-    );
-
-  transform-origin: bottom;
-
-  border-radius: 100%;
-}
-
-.grass span:nth-child(1) {
-  height: 110px;
-  left: 20px;
-  transform: rotate(-18deg);
-}
-
-.grass span:nth-child(2) {
-  height: 145px;
-  left: 42px;
-  transform: rotate(-9deg);
-}
-
-.grass span:nth-child(3) {
-  height: 128px;
-  left: 64px;
-  transform: rotate(4deg);
-}
-
-.grass span:nth-child(4) {
-  height: 170px;
-  left: 88px;
-  transform: rotate(-13deg);
-}
-
-.grass span:nth-child(5) {
-  height: 118px;
-  left: 111px;
-  transform: rotate(12deg);
-}
-
-.grass span:nth-child(6) {
-  height: 155px;
-  left: 133px;
-  transform: rotate(18deg);
-}
-
-.grass span:nth-child(7) {
-  height: 92px;
-  left: 154px;
-  transform: rotate(26deg);
-}
-
-
-/* =========================================================
-   13. ESTRELLAS PEQUEÑAS
-========================================================= */
-
-.star {
-
-  position: absolute;
-
-  z-index: 4;
-
-  color: #7699ad;
-
-  font-size: 21px;
-
-  opacity: 0.72;
-
-  animation:
-    twinkle 5s ease-in-out infinite;
-}
-
-.star.one {
-  top: 12%;
-  left: 5%;
-}
-
-.star.two {
-  top: 39%;
-  right: 4%;
-  animation-delay: 1.7s;
-}
-
-.star.three {
-  top: 76%;
-  left: 2.7%;
-  animation-delay: 3s;
-}
-
-
-/* =========================================================
-   14. ESTRELLA FUGAZ
-========================================================= */
-
-.shooting-star {
-
-  position: absolute;
-
-  top: 18%;
-
-  right: -30%;
-
-  width: 180px;
-  height: 3px;
-
-  z-index: 6;
-
-  pointer-events: none;
-
-  transform:
-    rotate(-28deg);
-
-  transform-origin: right center;
-
-  animation:
-    shootingStar 15s linear infinite;
-}
-
-
-/* Estela */
-
-.shooting-star::before {
-
-  content: "";
-
-  position: absolute;
-
-  right: 0;
-
-  top: 0;
-
-  width: 100%;
-  height: 2px;
-
-  background:
-    linear-gradient(
-      to left,
-      rgba(255,255,255,0),
-      rgba(135,172,195,0.12),
-      rgba(135,172,195,0.65),
-      rgba(255,255,255,0.95)
-    );
-
-  box-shadow:
-    0 0 5px rgba(130,170,200,0.5);
-}
-
-
-/* Cabeza brillante */
-
-.shooting-star::after {
-
-  content: "✦";
-
-  position: absolute;
-
-  right: -8px;
-  top: -13px;
-
-  color: #6e96af;
-
-  font-size: 25px;
-
-  text-shadow:
-    0 0 10px rgba(255,255,255,0.9);
-}
-
-
-/* =========================================================
-   15. SECCIÓN CANCIONES
-========================================================= */
-
-.songs-section {
-
-  position: relative;
-
-  z-index: 10;
-
-  width: min(720px, 100%);
-
-  margin:
-    85px auto
-    0;
-
-}
-
-.songs-title-row {
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 16px;
-
-  margin-bottom: 28px;
-}
-
-.songs-title-row::before,
-.songs-title-row::after {
-
-  content: "";
-
-  height: 1px;
-
-  flex: 1;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      rgba(31,69,94,0.5)
-    );
-}
-
-.songs-title-row::after {
-
-  background:
-    linear-gradient(
-      to left,
-      transparent,
-      rgba(31,69,94,0.5)
-    );
-}
-
-.songs-heading {
-
-  margin: 0;
-
-  color: #294b66;
-
-  font-size: 19px;
-
-  letter-spacing: 5px;
-
-  font-weight: 800;
-
-  white-space: nowrap;
-}
-
-
-/* =========================================================
-   16. LISTADO DE CANCIONES
-========================================================= */
-
-.song-list {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 12px;
-}
-
-.song {
-
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 15px;
-
-  width: 100%;
-
-  min-height: 72px;
-
-  padding:
-    13px
-    17px
-    13px
-    22px;
-
-  text-decoration: none;
-
-  color: #234963;
-
-  background:
-    rgba(255,255,255,0.64);
-
-  border:
-    1px solid rgba(35,73,99,0.17);
-
-  border-radius: 18px;
-
-  box-shadow:
-    0 8px 20px rgba(50,65,70,0.07);
-
-  transition:
-    transform 0.18s ease,
-    background 0.18s ease,
-    box-shadow 0.18s ease;
-}
-
-.song:hover {
-
-  transform:
-    translateY(-2px);
-
-  background:
-    rgba(255,255,255,0.88);
-
-  box-shadow:
-    0 12px 26px rgba(50,65,70,0.11);
-}
-
-.song:active {
-
-  transform:
-    scale(0.985);
-}
-
-.song-info {
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-start;
-
-  text-align: left;
-}
-
-.song-number {
-
-  margin-bottom: 3px;
-
-  font-size: 11px;
-
-  letter-spacing: 2px;
-
-  color:
-    rgba(35,73,99,0.48);
-}
-
-.song-name {
-
-  font-size: clamp(16px, 2.2vw, 20px);
-
-  font-weight: 800;
-
-  line-height: 1.2;
-}
-
-.play-button {
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 43px;
-  height: 43px;
-
-  border-radius: 50%;
-
-  background: #2e668f;
-
-  color: white;
-
-  font-size: 16px;
-
-  box-shadow:
-    0 5px 12px rgba(46,102,143,0.28);
-
-}
-
-
-/* =========================================================
-   17. ANIMACIONES
-========================================================= */
-
-@keyframes subtlePulse {
-
-  0%, 100% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.18);
-  }
-}
-
-
-@keyframes twinkle {
-
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(0.8) rotate(0deg);
-  }
-
-  50% {
-    opacity: 0.95;
-    transform: scale(1.15) rotate(25deg);
-  }
-}
-
-
-/* La estrella permanece invisible la mayor parte del tiempo.
-   Cruza rápidamente en diagonal, como una estrella fugaz. */
-
-@keyframes shootingStar {
-
-  0% {
-    opacity: 0;
-    transform:
-      translate(0, 0)
-      rotate(-28deg)
-      scaleX(0.2);
-  }
-
-  8% {
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-    transform:
-      translate(-10vw, 6vh)
-      rotate(-28deg)
-      scaleX(0.6);
-  }
-
-  15% {
-    opacity: 1;
-    transform:
-      translate(-95vw, 55vh)
-      rotate(-28deg)
-      scaleX(1);
-  }
-
-  17% {
-    opacity: 0;
-    transform:
-      translate(-110vw, 63vh)
-      rotate(-28deg)
-      scaleX(0.7);
-  }
-
-  100% {
-    opacity: 0;
-    transform:
-      translate(-110vw, 63vh)
-      rotate(-28deg)
-      scaleX(0.7);
-  }
-}
-
-
-/* =========================================================
-   18. MÓVIL
-========================================================= */
-
-@media (max-width: 600px) {
-
-  html,
-  body {
-    background:
-      #f4eddd !important;
-  }
-
-  .page {
-    min-height: 100svh;
-    background:
-      radial-gradient(
-        circle at 50% 34%,
-        rgba(255,255,255,0.9) 0%,
-        rgba(255,255,255,0.45) 30%,
-        rgba(244,237,221,0.3) 65%,
-        rgba(239,227,201,0.38) 100%
-      ),
-      #f4eddd !important;
-  }
-
-  .content {
-
-    padding:
-      27px
-      18px
-      65px;
-  }
-
-
-  /* Título */
-
-  .title-svg {
-
-    width: 100%;
-
-    margin-top: 0;
-  }
-
-  .subtitle {
-
-    font-size: 18px;
-
-    margin-top: -4px;
-  }
-
-  .divider {
-
-    margin:
-      28px auto
-      8px;
-  }
-
-  .divider-line {
-
-    width: 70px;
-  }
-
-
-  /* Lolo */
-
-  .lolo-container {
-
-    margin-top: 20px;
-  }
-
-  .lolo {
-
-    width: min(255px, 63vw);
-  }
-
-
-  /* Paisaje */
-
-  .landscape {
-
-    top: 48%;
-
-    height: 250px;
-  }
-
-  .barraca {
-
-    width: 95px;
-
-    transform-origin: bottom;
-  }
-
-  .barraca.left {
-
-    left: -4%;
-
-    transform: scale(0.72);
-  }
-
-  .barraca.right {
-
-    right: -4%;
-
-    transform:
-      scaleX(-1)
-      scale(0.72);
-  }
-
-  .grass {
-
-    width: 110px;
-
-    transform: scale(0.75);
-
-    transform-origin: bottom;
-  }
-
-  .grass.left {
-    left: -8%;
-  }
-
-  .grass.right {
-    right: -8%;
-    transform:
-      scaleX(-1)
-      scale(0.75);
-  }
-
-
-  /* Canciones */
-
-  .songs-section {
-
-    margin-top: 62px;
-  }
-
-  .songs-heading {
-
-    font-size: 15px;
-
-    letter-spacing: 3px;
-  }
-
-  .song {
-
-    min-height: 68px;
-
-    padding-left: 17px;
-
-    border-radius: 16px;
-  }
-
-  .song-name {
-
-    font-size: 16px;
-  }
-
-  .play-button {
-
-    width: 41px;
-    height: 41px;
-  }
-
-
-  /* Fondo */
-
-  .d1 { left: -15%; }
-  .d2 { left: 18%; }
-  .d3 { left: 51%; }
-  .d4 { left: 84%; }
-  .d5 { display: none; }
-
-  .shooting-star {
-
-    width: 125px;
-
-    top: 17%;
-  }
-
-  .star.one {
-    top: 9%;
-  }
-
-}
-
-
-/* =========================================================
-   19. ACCESIBILIDAD
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-
-    scroll-behavior: auto !important;
-  }
-
-}
-
-</style>
-
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #f6ecd4 !important;
+      color-scheme: light !important;
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      background: #f6ecd4 !important;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /*
+      CONTENEDOR PRINCIPAL
+
+      La imagen mantiene siempre sus proporciones originales.
+    */
+    .site {
+      position: relative;
+      width: 100%;
+      max-width: 653px;
+
+      margin: 0 auto;
+
+      line-height: 0;
+      overflow: hidden;
+
+      background: #f6ecd4;
+    }
+
+    /*
+      IMAGEN DE ESCRITORIO
+    */
+    .desktop-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /*
+      IMAGEN MÓVIL
+
+      Oculta por defecto.
+    */
+    .mobile-image {
+      display: none;
+      width: 100%;
+      height: auto;
+    }
+
+    /*
+      ENLACES DE LAS CANCIONES
+
+      Son zonas transparentes situadas exactamente
+      sobre las tarjetas de la ilustración.
+    */
+    .song-link {
+      position: absolute;
+      z-index: 10;
+
+      display: block;
+
+      border-radius: 18px;
+
+      text-decoration: none;
+
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /*
+      Pequeño efecto profesional al tocar/pasar por una canción.
+      No modifica el diseño visual original.
+    */
+    .song-link:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .song-link:active {
+      background: rgba(20, 58, 100, 0.08);
+    }
+
+
+    /* =========================================
+       POSICIONES - VERSIÓN ESCRITORIO
+       ========================================= */
+
+    .song-1 {
+      left: 14%;
+      width: 72%;
+      top: 65.2%;
+      height: 4.8%;
+    }
+
+    .song-2 {
+      left: 14%;
+      width: 72%;
+      top: 70.1%;
+      height: 4.8%;
+    }
+
+    .song-3 {
+      left: 14%;
+      width: 72%;
+      top: 75%;
+      height: 4.8%;
+    }
+
+    .song-4 {
+      left: 14%;
+      width: 72%;
+      top: 79.9%;
+      height: 5.5%;
+    }
+
+    .song-5 {
+      left: 14%;
+      width: 72%;
+      top: 85.4%;
+      height: 4.8%;
+    }
+
+    .song-6 {
+      left: 14%;
+      width: 72%;
+      top: 90.3%;
+      height: 4.8%;
+    }
+
+
+    /* =========================================
+       VERSIÓN MÓVIL
+       ========================================= */
+
+    @media (max-width: 700px) {
+
+      body {
+        width: 100%;
+        overflow-x: hidden;
+        background: #f6ecd4 !important;
+      }
+
+      .site {
+        width: 100%;
+        max-width: 430px;
+        background: #f6ecd4 !important;
+      }
+
+      .desktop-image {
+        display: none;
+      }
+
+      .mobile-image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+
+      /*
+        Reposicionamos los enlaces sobre las tarjetas
+        de la versión vertical.
+      */
+
+      .song-1 {
+        left: 3%;
+        width: 94%;
+        top: 63.7%;
+        height: 5.4%;
+      }
+
+      .song-2 {
+        left: 3%;
+        width: 94%;
+        top: 69.2%;
+        height: 5.4%;
+      }
+
+      .song-3 {
+        left: 3%;
+        width: 94%;
+        top: 74.7%;
+        height: 5.4%;
+      }
+
+      .song-4 {
+        left: 3%;
+        width: 94%;
+        top: 80.2%;
+        height: 5.4%;
+      }
+
+      .song-5 {
+        left: 3%;
+        width: 94%;
+        top: 85.7%;
+        height: 5.4%;
+      }
+
+      .song-6 {
+        left: 3%;
+        width: 94%;
+        top: 91.2%;
+        height: 5.4%;
+      }
+
+    }
+
+  </style>
 </head>
 
 
 <body>
 
-<div class="page">
-
-
-  <!-- =====================================================
-       FONDO DECORATIVO
-  ====================================================== -->
-
-  <div class="background-lines">
-
-    <div class="diagonal d1"></div>
-    <div class="diagonal d2"></div>
-    <div class="diagonal d3"></div>
-    <div class="diagonal d4"></div>
-    <div class="diagonal d5"></div>
-
-  </div>
-
-
-  <div class="dotted-line dotted-top"></div>
-  <div class="dotted-line dotted-bottom"></div>
-
-
-  <!-- ESTRELLAS -->
-
-  <div class="star one">✦</div>
-  <div class="star two">✦</div>
-  <div class="star three">✦</div>
-
-
-  <!-- ESTRELLA FUGAZ -->
-
-  <div class="shooting-star"></div>
-
-
-  <!-- =====================================================
-       PAISAJE
-  ====================================================== -->
-
-  <div class="landscape">
-
-
-    <!-- BARRACA IZQUIERDA -->
-
-    <div class="barraca left">
-
-      <div class="roof"></div>
-
-      <div class="house">
-
-        <div class="door"></div>
-
-      </div>
-
-      <div class="roof-lines">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-      </div>
-
-    </div>
-
-
-    <!-- HIERBAS IZQUIERDA -->
-
-    <div class="grass left">
-
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-
-    </div>
-
-
-    <!-- BARRACA DERECHA -->
-
-    <div class="barraca right">
-
-      <div class="roof"></div>
-
-      <div class="house">
-
-        <div class="door"></div>
-
-      </div>
-
-      <div class="roof-lines">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-      </div>
-
-    </div>
-
-
-    <!-- HIERBAS DERECHA -->
-
-    <div class="grass right">
-
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- =====================================================
-       CONTENIDO
-  ====================================================== -->
-
-  <main class="content">
-
-
-    <!-- CABECERA -->
-
-    <header class="header">
-
-
-      <!--
-      TÍTULO CURVADO REAL
-      SVG para controlar exactamente la curvatura.
-      -->
-
-      <svg
-        class="title-svg"
-        viewBox="0 0 1000 230"
-        aria-label="Lolo y la Yaya"
-        role="img"
-      >
-
-        <defs>
-
-          <!-- Curvatura HACIA ABAJO -->
-
-          <path
-            id="titleCurve"
-            d="M 120 70 Q 500 185 880 70"
-            fill="transparent"
-          />
-
-        </defs>
-
-
-        <text
-          font-size="100"
-          text-anchor="middle"
-        >
-
-          <textPath
-            href="#titleCurve"
-            startOffset="50%"
-          >
-
-            Lolo y la Yaya
-
-          </textPath>
-
-        </text>
-
-      </svg>
-
-
-      <p class="subtitle">
-        La música de Lolo y la Yaya
-      </p>
-
-
-      <div class="divider">
-
-        <div class="divider-line"></div>
-
-        <div class="divider-star">✦</div>
-
-        <div class="divider-line right"></div>
-
-      </div>
-
-
-    </header>
-
-
-    <!-- LOLO -->
-
-    <div class="lolo-container">
-
-      <img
-        class="lolo"
-        src="lolo.png"
-        alt="Lolo"
-      >
-
-    </div>
-
-
-    <!-- ===================================================
-         CANCIONES
-    ==================================================== -->
-
-    <section class="songs-section">
-
-
-      <div class="songs-title-row">
-
-        <h2 class="songs-heading">
-          LAS CANCIONES
-        </h2>
-
-      </div>
-
-
-      <div class="song-list">
-
-
-        <!-- CANCIÓN 1 -->
-
-        <a
-          href="por-si-algun-dia.html"
-          class="song"
-        >
-
-          <div class="song-info">
-
-            <span class="song-number">
-              CANCIÓN 01
-            </span>
-
-            <span class="song-name">
-              Por si algún día
-            </span>
-
-          </div>
-
-          <span class="play-button">
-            ▶
-          </span>
-
-        </a>
-
-
-        <!-- CANCIÓN 2 -->
-
-        <a
-          href="no-me-aplastes-soy-un-heroe.html"
-          class="song"
-        >
-
-          <div class="song-info">
-
-            <span class="song-number">
-              CANCIÓN 02
-            </span>
-
-            <span class="song-name">
-              No me aplastes, soy un héroe
-            </span>
-
-          </div>
-
-          <span class="play-button">
-            ▶
-          </span>
-
-        </a>
-
-
-        <!-- CANCIÓN 3 -->
-
-        <a
-          href="basura-con-estilo.html"
-          class="song"
-        >
-
-          <div class="song-info">
-
-            <span class="song-number">
-              CANCIÓN 03
-            </span>
-
-            <span class="song-name">
-              Basura con estilo
-            </span>
-
-          </div>
-
-          <span class="play-button">
-            ▶
-          </span>
-
-        </a>
-
-
-        <!-- CANCIÓN 4 -->
-
-        <a
-          href="molestar-por-la-noche.html"
-          class="song"
-        >
-
-          <div class="song-info">
-
-            <span class="song-number">
-              CANCIÓN 04
-            </span>
-
-            <span class="song-name">
-              Molestar por la noche,
-              dormir todo el día
-            </span>
-
-          </div>
-
-          <span class="play-button">
-            ▶
-          </span>
-
-        </a>
-
-
-        <!-- CANCIÓN 5 -->
-
-        <a
-          href="una-espia-intergalactica.html"
-          class="song"
-        >
-
-          <div class="song-info">
-
-            <span class="song-number">
-              CANCIÓN 05
-            </span>
-
-            <span class="song-name">
-              Una espía intergaláctica
-            </span>
-
-          </div>
-
-          <span class="play-button">
-            ▶
-          </span>
-
-        </a>
-
-
-        <!-- CANCIÓN 6 -->
-
-        <a
-          href="la-leyenda-de-lolo-y-la-yaya.html"
-          class="song"
-        >
-
-          <div class="song-info">
-
-            <span class="song-number">
-              CANCIÓN 06
-            </span>
-
-            <span class="song-name">
-              La leyenda de Lolo y la Yaya
-            </span>
-
-          </div>
-
-          <span class="play-button">
-            ▶
-          </span>
-
-        </a>
-
-
-      </div>
-
-    </section>
+  <main class="site">
+
+    <!--
+      IMAGEN PARA ORDENADOR
+    -->
+    <img
+      src="lolo-home-desktop.png"
+      alt="Lolo y la Yaya - La música"
+      class="desktop-image"
+    >
+
+
+    <!--
+      IMAGEN PARA MÓVIL
+    -->
+    <img
+      src="lolo-home-mobile.png"
+      alt="Lolo y la Yaya - La música"
+      class="mobile-image"
+    >
+
+
+    <!--
+      ==================================================
+      ENLACES DE LAS CANCIONES
+      ==================================================
+
+      De momento llevan a "#" porque las páginas todavía
+      no existen.
+
+      Más adelante cambiaremos cada href por su URL definitiva.
+    -->
+
+
+    <!-- 01 -->
+    <a
+      href="#"
+      class="song-link song-1"
+      aria-label="Por si algún día"
+    ></a>
+
+
+    <!-- 02 -->
+    <a
+      href="#"
+      class="song-link song-2"
+      aria-label="No me aplastes, soy un héroe"
+    ></a>
+
+
+    <!-- 03 -->
+    <a
+      href="#"
+      class="song-link song-3"
+      aria-label="Basura con estilo"
+    ></a>
+
+
+    <!-- 04 -->
+    <a
+      href="#"
+      class="song-link song-4"
+      aria-label="Molestar por la noche, dormir todo el día"
+    ></a>
+
+
+    <!-- 05 -->
+    <a
+      href="#"
+      class="song-link song-5"
+      aria-label="Una espía intergaláctica"
+    ></a>
+
+
+    <!-- 06 -->
+    <a
+      href="#"
+      class="song-link song-6"
+      aria-label="La leyenda de Lolo y la Yaya"
+    ></a>
 
 
   </main>
-
-</div>
 
 </body>
 </html>
