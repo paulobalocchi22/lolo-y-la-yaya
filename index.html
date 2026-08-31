@@ -2,790 +2,1382 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <!-- Fuerza el diseño claro incluso si el móvil usa modo oscuro -->
+  <meta name="color-scheme" content="light only">
 
   <title>Lolo y la Yaya — La música de Lolo y la Yaya</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
 
     :root {
+      color-scheme: light only;
+
       --crema: #f3ead8;
       --crema-claro: #fffaf0;
+
       --azul: #1673a8;
-      --azul-oscuro: #123f63;
-      --azul-suave: #c8e0e9;
-      --marron: #69452e;
-      --dorado: #c99a51;
-      --verde: #708d67;
+      --azul-oscuro: #173b5d;
+
+      --marron: #6b4932;
+      --dorado: #c7a166;
+
+      --verde: #7f9878;
+
       --texto: #29343a;
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       min-height: 100%;
-      background-color: #f3ead8;
+      background-color: #f3ead8 !important;
+      color-scheme: light only !important;
     }
+
 
     body {
       margin: 0;
       min-width: 320px;
       min-height: 100vh;
       min-height: 100dvh;
-      background-color: #f3ead8;
-      color: var(--texto);
+
+      background-color: #f3ead8 !important;
+
+      color: #29343a !important;
+
+      color-scheme: light only !important;
+
       font-family: "Nunito", sans-serif;
+
       overflow-x: hidden;
+
+      -webkit-text-size-adjust: 100%;
     }
 
+
     /*
-      Esta capa contiene TODO el fondo.
-      Así evitamos que Safari o Chrome móvil muestren
-      negro detrás de body o de elementos fixed.
+    ------------------------------------------------
+    FONDO PRINCIPAL
+    ------------------------------------------------
     */
 
     .pagina {
+
       position: relative;
+
+      width: 100%;
+
       min-height: 100vh;
       min-height: 100dvh;
+
       overflow: hidden;
-      background:
+
+      isolation: isolate;
+
+      background-color: #f3ead8 !important;
+
+      background-image:
+
         radial-gradient(
           ellipse at 50% 8%,
-          rgba(255,255,255,.72) 0%,
-          rgba(255,255,255,.22) 28%,
-          transparent 58%
+          rgba(255,255,255,.78) 0%,
+          rgba(255,255,255,.28) 30%,
+          transparent 62%
         ),
+
         linear-gradient(
           180deg,
           #f8f0df 0%,
-          #f3ead8 52%,
-          #eee0c9 100%
+          #f3ead8 55%,
+          #eee1ca 100%
         );
+
+      color-scheme: light only !important;
     }
 
+
     /*
-      PATRÓN DEL FONDO
+    PATRÓN DE PEQUEÑOS PUNTOS
     */
 
     .textura {
+
       position: absolute;
+
       inset: 0;
+
+      z-index: -2;
+
       pointer-events: none;
-      opacity: .5;
+
+      opacity: .48;
+
       background-image:
+
         radial-gradient(
           circle at 2px 2px,
-          rgba(18,63,99,.14) 1px,
-          transparent 1.2px
+          rgba(23,59,93,.16) 1px,
+          transparent 1.25px
         ),
+
         radial-gradient(
           circle at 18px 18px,
-          rgba(201,154,81,.13) 1px,
+          rgba(199,161,102,.14) 1px,
           transparent 1.3px
         );
+
       background-size: 36px 36px;
     }
 
+
+    /*
+    LÍNEAS DIAGONALES SUTILES
+    */
+
     .textura-lineas {
+
       position: absolute;
+
       inset: 0;
+
+      z-index: -1;
+
       pointer-events: none;
-      opacity: .2;
+
+      opacity: .16;
+
       background:
+
         repeating-linear-gradient(
+
           115deg,
+
           transparent 0px,
-          transparent 72px,
-          rgba(18,63,99,.18) 73px,
+
           transparent 74px,
-          transparent 145px
+
+          rgba(23,59,93,.24) 75px,
+
+          transparent 76px,
+
+          transparent 148px
+
         );
     }
 
+
     /*
-      UNIVERSO DECORATIVO
+    ------------------------------------------------
+    ELEMENTOS DEL UNIVERSO
+    ------------------------------------------------
     */
 
     .universo {
+
       position: absolute;
+
       inset: 0;
+
+      z-index: 0;
+
       pointer-events: none;
+
       overflow: hidden;
     }
 
+
     .orbita {
+
       position: absolute;
+
       width: 135vw;
+
       height: 42vw;
+
       left: -18vw;
-      top: 130px;
-      border: 1.5px dashed rgba(18,63,99,.22);
+
+      top: 145px;
+
+      border: 1.5px dashed rgba(23,59,93,.22);
+
       border-radius: 50%;
+
       transform: rotate(-10deg);
     }
 
+
     .orbita-2 {
+
       position: absolute;
+
       width: 120vw;
+
       height: 35vw;
+
       right: -48vw;
-      top: 580px;
+
+      top: 610px;
+
       border: 1px dashed rgba(22,115,168,.18);
+
       border-radius: 50%;
+
       transform: rotate(14deg);
     }
 
+
     .orbita-3 {
+
       position: absolute;
+
       width: 110vw;
+
       height: 32vw;
+
       left: -35vw;
-      bottom: 110px;
-      border: 1px dashed rgba(105,69,46,.14);
+
+      bottom: 90px;
+
+      border: 1px dashed rgba(107,73,50,.15);
+
       border-radius: 50%;
+
       transform: rotate(-18deg);
     }
 
+
     .estrella {
+
       position: absolute;
-      color: var(--azul);
+
+      color: #4f7f9f;
+
       line-height: 1;
+
       animation: destellar 4s ease-in-out infinite;
     }
 
+
     .estrella-1 {
-      top: 95px;
-      left: 8%;
-      font-size: 18px;
+
+      top: 135px;
+
+      left: 5%;
+
+      font-size: 17px;
     }
+
 
     .estrella-2 {
-      top: 220px;
-      right: 8%;
+
+      top: 320px;
+
+      right: 5%;
+
       font-size: 12px;
-      animation-delay: 1s;
+
+      animation-delay: 1.2s;
     }
 
+
     .estrella-3 {
-      top: 430px;
-      left: 6%;
+
+      top: 500px;
+
+      left: 5%;
+
       font-size: 15px;
+
       animation-delay: 2s;
     }
 
+
     .estrella-4 {
-      top: 680px;
-      right: 7%;
-      font-size: 19px;
+
+      top: 720px;
+
+      right: 6%;
+
+      font-size: 18px;
+
       animation-delay: .5s;
     }
 
+
     .estrella-5 {
-      top: 950px;
-      left: 10%;
+
+      top: 930px;
+
+      left: 9%;
+
       font-size: 11px;
+
       animation-delay: 2.7s;
     }
 
-    .estrella-6 {
-      bottom: 110px;
-      right: 11%;
-      font-size: 16px;
-      animation-delay: 1.5s;
-    }
 
     @keyframes destellar {
-      0%, 100% {
-        opacity: .25;
-        transform: scale(.75) rotate(0deg);
+
+      0%,
+      100% {
+
+        opacity: .3;
+
+        transform: scale(.8);
       }
+
 
       50% {
+
         opacity: 1;
-        transform: scale(1.2) rotate(12deg);
+
+        transform: scale(1.18);
       }
+
     }
 
+
     /*
-      ESTRELLA FUGAZ
+    ESTRELLA FUGAZ
     */
 
     .fugaz {
+
       position: absolute;
-      top: 150px;
-      right: 4%;
+
+      top: 245px;
+
+      right: 9%;
+
       width: 125px;
+
       height: 2px;
+
       border-radius: 10px;
-      opacity: .8;
-      transform: rotate(140deg);
-      transform-origin: right center;
+
+      opacity: .85;
+
+      transform: rotate(-28deg);
+
       background:
+
         linear-gradient(
+
           90deg,
-          transparent,
-          rgba(22,115,168,.15),
-          rgba(22,115,168,.95)
+
+          transparent 0%,
+
+          rgba(22,115,168,.15) 30%,
+
+          rgba(22,115,168,.9) 100%
+
         );
-      animation: aparecer-fugaz 11s ease-in-out infinite;
+
+      animation: fugaz 12s ease-in-out infinite;
     }
 
+
     .fugaz::after {
+
       content: "✦";
+
       position: absolute;
-      right: -6px;
+
+      right: -7px;
+
       top: -9px;
-      color: var(--azul);
+
+      color: #1673a8;
+
       font-size: 18px;
     }
 
-    @keyframes aparecer-fugaz {
-      0%, 65%, 100% {
+
+    @keyframes fugaz {
+
+      0%,
+      60%,
+      100% {
+
         opacity: 0;
+
         transform:
-          translate(-40px, -25px)
-          rotate(140deg);
+
+          translate(-70px,-35px)
+
+          rotate(-28deg);
       }
 
-      70% {
+
+      66% {
+
         opacity: .9;
       }
 
-      82% {
+
+      80% {
+
         opacity: .9;
+
         transform:
-          translate(35px, 30px)
-          rotate(140deg);
+
+          translate(45px,25px)
+
+          rotate(-28deg);
       }
 
-      87% {
+
+      86% {
+
         opacity: 0;
       }
+
     }
 
+
     /*
-      CONTENIDO
+    ------------------------------------------------
+    CONTENIDO
+    ------------------------------------------------
     */
 
     .contenedor {
+
       position: relative;
+
       z-index: 2;
+
       width: min(100%, 720px);
+
       margin: 0 auto;
-      padding: 36px 20px 50px;
+
+      padding: 34px 20px 50px;
     }
 
+
     /*
-      TÍTULO CURVO
+    ------------------------------------------------
+    TÍTULO
+    ------------------------------------------------
     */
 
     .hero {
+
       text-align: center;
-      padding-top: 8px;
     }
+
 
     .titulo-curvo {
+
       display: flex;
+
       justify-content: center;
+
       align-items: flex-start;
-      gap: 0;
+
       margin: 0 auto;
-      color: var(--azul-oscuro);
+
+      color: #173b5d;
+
       font-family: "Baloo 2", sans-serif;
-      font-size: clamp(35px, 8.3vw, 58px);
+
+      font-size: clamp(37px, 7vw, 58px);
+
       font-weight: 800;
+
       line-height: 1;
-      letter-spacing: -2.4px;
+
+      letter-spacing: -2px;
+
       white-space: nowrap;
+
       text-shadow:
-        0 2px 0 rgba(255,255,255,.5),
-        0 5px 12px rgba(18,63,99,.08);
+
+        0 2px 0 rgba(255,255,255,.55),
+
+        0 5px 14px rgba(23,59,93,.08);
     }
+
 
     .titulo-curvo span {
+
       display: inline-block;
+
+      transition: transform .3s ease;
     }
 
+
     /*
-      Curvatura hacia abajo:
-      los extremos quedan más altos
-      y el centro baja ligeramente
+    Curva suave.
+    Los extremos quedan arriba
+    y el centro baja.
     */
 
     .titulo-curvo span:nth-child(1) {
-      transform: translateY(0px) rotate(-7deg);
+      transform: translateY(0px);
     }
 
     .titulo-curvo span:nth-child(2) {
-      transform: translateY(4px) rotate(-5deg);
+      transform: translateY(3px);
     }
 
     .titulo-curvo span:nth-child(3) {
-      transform: translateY(7px) rotate(-3deg);
+      transform: translateY(6px);
     }
 
     .titulo-curvo span:nth-child(4) {
-      transform: translateY(10px) rotate(-1deg);
+      transform: translateY(8px);
     }
 
     .titulo-curvo span:nth-child(5) {
-      transform: translateY(11px);
+      transform: translateY(10px);
     }
 
     .titulo-curvo span:nth-child(6) {
-      transform: translateY(11px);
+      transform: translateY(12px);
     }
 
     .titulo-curvo span:nth-child(7) {
-      transform: translateY(11px);
+      transform: translateY(14px);
     }
 
     .titulo-curvo span:nth-child(8) {
-      transform: translateY(10px) rotate(1deg);
+      transform: translateY(15px);
     }
 
     .titulo-curvo span:nth-child(9) {
-      transform: translateY(7px) rotate(3deg);
+      transform: translateY(15px);
     }
 
     .titulo-curvo span:nth-child(10) {
-      transform: translateY(4px) rotate(5deg);
+      transform: translateY(14px);
     }
 
     .titulo-curvo span:nth-child(11) {
-      transform: translateY(0px) rotate(7deg);
+      transform: translateY(12px);
     }
+
+    .titulo-curvo span:nth-child(12) {
+      transform: translateY(9px);
+    }
+
+    .titulo-curvo span:nth-child(13) {
+      transform: translateY(6px);
+    }
+
+    .titulo-curvo span:nth-child(14) {
+      transform: translateY(3px);
+    }
+
+    .titulo-curvo span:nth-child(15) {
+      transform: translateY(0px);
+    }
+
 
     .titulo-curvo .espacio {
-      width: .23em;
+
+      width: .22em;
     }
 
+
     .subtitulo {
+
       margin: 24px 0 0;
-      color: var(--marron);
+
+      color: #6b4932 !important;
+
       font-size: 17px;
+
       font-weight: 800;
     }
 
+
     .separador {
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       gap: 11px;
-      margin: 17px auto 12px;
-      color: var(--azul);
+
+      margin: 15px auto 4px;
+
+      color: #1673a8;
+
       font-size: 14px;
     }
 
+
     .separador::before,
     .separador::after {
+
       content: "";
+
       width: 55px;
+
       height: 1px;
+
       background: linear-gradient(
         90deg,
         transparent,
-        var(--azul)
+        #1673a8
       );
+
       opacity: .65;
     }
 
+
     .separador::after {
+
       transform: scaleX(-1);
     }
 
+
     /*
-      LOLO
+    ------------------------------------------------
+    LOLO
+    ------------------------------------------------
     */
 
     .lolo-wrap {
+
       position: relative;
-      width: min(100%, 205px);
+
+      width: min(100%, 195px);
+
       margin: 0 auto;
+
       z-index: 3;
     }
 
+
     .lolo {
+
       display: block;
+
       width: 100%;
+
       height: auto;
+
       filter:
+
         drop-shadow(
           0 13px 11px rgba(78,48,26,.18)
         );
     }
 
+
     /*
-      BARRACAS VALENCIANAS
+    ------------------------------------------------
+    PAISAJE
+    ------------------------------------------------
     */
 
     .paisaje {
+
       position: absolute;
+
       left: 0;
+
       right: 0;
-      top: 275px;
-      height: 230px;
+
+      top: 330px;
+
+      height: 250px;
+
       pointer-events: none;
+
       z-index: 1;
     }
 
+
+    /*
+    BARRACAS
+    */
+
     .barraca {
+
       position: absolute;
-      bottom: 22px;
-      width: 92px;
-      height: 48px;
-      opacity: .45;
+
+      bottom: 25px;
+
+      width: 125px;
+
+      height: 95px;
+
+      opacity: .42;
     }
 
-    .barraca .casa {
+
+    .barraca .pared {
+
       position: absolute;
-      left: 9px;
+
       bottom: 0;
-      width: 74px;
-      height: 45px;
-      border: 1.5px solid var(--dorado);
+
+      left: 24px;
+
+      width: 78px;
+
+      height: 53px;
+
+      border:
+
+        1.5px solid #b89962;
+
       border-top: none;
-      border-radius: 1px;
-      background:
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px,
-          transparent 11px,
-          rgba(201,154,81,.23) 12px,
-          transparent 13px
-        );
     }
 
-    .barraca .techo {
+
+    .barraca .tejado {
+
       position: absolute;
-      left: 4px;
-      top: -21px;
-      width: 84px;
-      height: 84px;
-      border-top: 1.5px solid var(--dorado);
-      border-left: 1.5px solid var(--dorado);
-      transform: rotate(45deg);
+
+      left: 12px;
+
+      bottom: 49px;
+
+      width: 101px;
+
+      height: 61px;
+
+      overflow: hidden;
     }
+
+
+    .barraca .tejado::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 74px;
+
+      height: 74px;
+
+      left: 13px;
+
+      top: 13px;
+
+      border:
+
+        1.5px solid #b89962;
+
+      transform:
+
+        rotate(45deg);
+    }
+
 
     .barraca .puerta {
+
       position: absolute;
+
+      left: 54px;
+
       bottom: 0;
-      left: 36px;
-      width: 17px;
-      height: 27px;
-      border: 1.5px solid var(--dorado);
+
+      width: 19px;
+
+      height: 31px;
+
+      border:
+
+        1.5px solid #b89962;
+
       border-bottom: none;
-      border-radius: 8px 8px 0 0;
+
+      border-radius:
+
+        9px 9px 0 0;
     }
+
 
     .barraca .ventana {
+
       position: absolute;
-      bottom: 19px;
-      width: 9px;
-      height: 10px;
-      border: 1px solid var(--dorado);
+
+      bottom: 25px;
+
+      width: 11px;
+
+      height: 11px;
+
+      border:
+
+        1px solid #b89962;
     }
+
 
     .barraca .ventana-1 {
-      left: 19px;
+
+      left: 34px;
     }
+
 
     .barraca .ventana-2 {
-      right: 18px;
+
+      right: 31px;
     }
 
+
     .barraca.izquierda {
-      left: -18px;
+
+      left: 6%;
+
       transform: scale(.92);
     }
 
+
     .barraca.derecha {
-      right: -22px;
-      bottom: 5px;
-      transform: scale(.72);
-      opacity: .36;
+
+      right: 5%;
+
+      bottom: 12px;
+
+      transform: scale(.82);
+
+      opacity: .34;
     }
 
+
     /*
-      HIERBAS
+    HIERBAS
     */
 
     .hierbas {
+
       position: absolute;
+
       bottom: 0;
-      width: 125px;
-      height: 90px;
+
+      width: 155px;
+
+      height: 130px;
+
       opacity: .5;
     }
 
-    .hierbas::before,
-    .hierbas::after {
-      content: "";
+
+    .hierbas span {
+
       position: absolute;
+
       bottom: 0;
+
       width: 2px;
-      height: 74px;
-      background: var(--verde);
+
+      background: #7f9878;
+
       transform-origin: bottom;
-      box-shadow:
-        10px -7px 0 -0.5px var(--verde),
-        21px 2px 0 -0.5px var(--verde),
-        34px -15px 0 -0.5px var(--verde),
-        48px -3px 0 -0.5px var(--verde),
-        64px -22px 0 -0.5px var(--verde),
-        78px -5px 0 -0.5px var(--verde),
-        94px -17px 0 -0.5px var(--verde);
     }
 
-    .hierbas::before {
-      transform: rotate(-14deg);
+
+    .hierbas span:nth-child(1) {
+
+      left: 8px;
+
+      height: 75px;
+
+      transform: rotate(-18deg);
     }
 
-    .hierbas::after {
-      transform: rotate(14deg);
-      left: 18px;
-      opacity: .75;
+
+    .hierbas span:nth-child(2) {
+
+      left: 23px;
+
+      height: 105px;
+
+      transform: rotate(-7deg);
     }
+
+
+    .hierbas span:nth-child(3) {
+
+      left: 39px;
+
+      height: 82px;
+
+      transform: rotate(13deg);
+    }
+
+
+    .hierbas span:nth-child(4) {
+
+      left: 57px;
+
+      height: 118px;
+
+      transform: rotate(-10deg);
+    }
+
+
+    .hierbas span:nth-child(5) {
+
+      left: 77px;
+
+      height: 89px;
+
+      transform: rotate(18deg);
+    }
+
+
+    .hierbas span:nth-child(6) {
+
+      left: 96px;
+
+      height: 110px;
+
+      transform: rotate(7deg);
+    }
+
+
+    .hierbas span:nth-child(7) {
+
+      left: 116px;
+
+      height: 72px;
+
+      transform: rotate(-15deg);
+    }
+
 
     .hierbas.izquierda {
-      left: -15px;
+
+      left: 10%;
     }
 
+
     .hierbas.derecha {
-      right: -30px;
+
+      right: 10%;
+
       transform: scaleX(-1);
     }
 
+
     /*
-      CANCIONES
+    ------------------------------------------------
+    CANCIONES
+    ------------------------------------------------
     */
 
     .canciones {
+
       position: relative;
+
       z-index: 4;
-      margin-top: 12px;
+
+      margin-top: 14px;
     }
 
+
     .titulo-seccion {
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       gap: 13px;
+
       margin-bottom: 16px;
     }
 
+
     .titulo-seccion::before,
     .titulo-seccion::after {
+
       content: "";
+
       width: 54px;
-      border-top: 1px dotted rgba(18,63,99,.65);
+
+      border-top:
+
+        1px dotted rgba(23,59,93,.65);
     }
 
+
     .titulo-seccion span {
-      color: var(--azul-oscuro);
+
+      color: #173b5d !important;
+
       font-family: "Space Mono", monospace;
+
       font-size: 12px;
+
       font-weight: 700;
+
       letter-spacing: 1.8px;
     }
 
+
     .lista {
+
       display: flex;
+
       flex-direction: column;
+
       gap: 10px;
     }
 
-    .cancion {
-      display: flex;
-      align-items: center;
-      min-height: 70px;
-      padding: 14px 17px;
-      text-decoration: none;
-      color: var(--texto);
 
-      background:
+    .cancion,
+    .cancion:link,
+    .cancion:visited,
+    .cancion:hover,
+    .cancion:active {
+
+      display: flex;
+
+      align-items: center;
+
+      min-height: 70px;
+
+      padding: 14px 17px;
+
+      text-decoration: none !important;
+
+      color: #29343a !important;
+
+      -webkit-text-fill-color: #29343a;
+
+      background-color: rgba(255,252,245,.9) !important;
+
+      background-image:
+
         linear-gradient(
           120deg,
-          rgba(255,252,245,.88),
-          rgba(255,248,235,.65)
+          rgba(255,252,245,.94),
+          rgba(255,248,235,.72)
         );
 
-      border: 1px solid rgba(18,63,99,.16);
+      border:
+
+        1px solid rgba(23,59,93,.16);
+
       border-radius: 16px;
 
       box-shadow:
-        0 4px 0 rgba(18,63,99,.05),
+
+        0 4px 0 rgba(23,59,93,.05),
+
         0 8px 20px rgba(86,58,36,.06);
 
       transition:
+
         transform .18s ease,
-        box-shadow .18s ease,
-        background .18s ease;
+
+        box-shadow .18s ease;
     }
+
 
     .cancion:hover {
+
       transform: translateY(-2px);
-      background: rgba(255,253,248,.95);
 
       box-shadow:
-        0 5px 0 rgba(18,63,99,.06),
-        0 12px 24px rgba(18,63,99,.11);
+
+        0 5px 0 rgba(23,59,93,.06),
+
+        0 12px 24px rgba(23,59,93,.11);
     }
 
+
     .cancion:active {
+
       transform: scale(.985);
     }
 
+
     .numero {
+
       flex: 0 0 42px;
-      color: var(--azul);
+
+      color: #1673a8 !important;
+
+      -webkit-text-fill-color: #1673a8;
+
       font-family: "Space Mono", monospace;
+
       font-size: 12px;
+
       font-weight: 700;
     }
 
+
     .nombre-cancion {
+
       flex: 1;
+
       padding-right: 10px;
+
+      color: #29343a !important;
+
+      -webkit-text-fill-color: #29343a;
+
       font-size: 17px;
+
       line-height: 1.25;
+
       font-weight: 900;
     }
 
+
     .flecha {
+
       flex: 0 0 22px;
-      color: var(--azul);
+
+      color: #1673a8 !important;
+
+      -webkit-text-fill-color: #1673a8;
+
       font-size: 27px;
+
       line-height: 1;
+
       text-align: right;
     }
 
+
     /*
-      FOOTER
+    ------------------------------------------------
+    FOOTER
+    ------------------------------------------------
     */
 
     footer {
+
       position: relative;
+
       z-index: 3;
+
       margin-top: 42px;
+
       text-align: center;
-      color: rgba(105,69,46,.72);
+
+      color: rgba(107,73,50,.72) !important;
+
       font-size: 13px;
+
       font-weight: 800;
     }
 
+
     footer span {
+
       margin: 0 8px;
-      color: var(--azul);
+
+      color: #1673a8 !important;
     }
 
+
     /*
-      MÓVIL
+    ------------------------------------------------
+    MÓVIL
+    ------------------------------------------------
     */
 
     @media (max-width: 480px) {
 
+      html,
+      body,
+      .pagina {
+
+        background-color: #f3ead8 !important;
+
+        color-scheme: light only !important;
+      }
+
+
       .contenedor {
+
         padding:
+
           28px 16px
+
           46px;
       }
 
+
       .titulo-curvo {
+
         font-size: 9vw;
-        letter-spacing: -1.8px;
+
+        letter-spacing: -1.7px;
       }
+
 
       .subtitulo {
-        margin-top: 22px;
+
+        margin-top: 23px;
+
         font-size: 16px;
       }
+
 
       .lolo-wrap {
-        width: 190px;
+
+        width: 182px;
       }
+
 
       .paisaje {
-        top: 255px;
+
+        top: 300px;
       }
+
 
       .barraca.izquierda {
-        left: -39px;
-        transform: scale(.78);
+
+        left: -10%;
+
+        transform: scale(.74);
       }
+
 
       .barraca.derecha {
-        right: -42px;
-        transform: scale(.61);
+
+        right: -10%;
+
+        transform: scale(.68);
       }
+
 
       .hierbas.izquierda {
-        left: -55px;
-        transform: scale(.8);
+
+        left: -18%;
+
+        transform: scale(.72);
       }
+
 
       .hierbas.derecha {
-        right: -65px;
+
+        right: -18%;
+
         transform:
+
           scaleX(-1)
-          scale(.8);
+
+          scale(.72);
       }
 
+
       .nombre-cancion {
+
         font-size: 16px;
       }
 
+
       .orbita {
+
         width: 180vw;
+
         height: 65vw;
+
         left: -45vw;
       }
 
+
       .orbita-2 {
+
         width: 160vw;
+
         height: 58vw;
       }
 
+
       .fugaz {
-        top: 125px;
-        right: -25px;
+
+        top: 225px;
+
+        right: -20px;
+
+        transform: rotate(-28deg);
       }
+
+    }
+
+
+    /*
+    RESPETA LA PREFERENCIA DE REDUCIR MOVIMIENTO
+    */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+      }
+
     }
 
   </style>
 </head>
+
 
 <body>
 
   <div class="pagina">
 
     <div class="textura"></div>
+
     <div class="textura-lineas"></div>
+
 
     <div class="universo">
 
       <div class="orbita"></div>
+
       <div class="orbita-2"></div>
+
       <div class="orbita-3"></div>
 
+
       <div class="estrella estrella-1">✦</div>
+
       <div class="estrella estrella-2">✦</div>
+
       <div class="estrella estrella-3">✦</div>
+
       <div class="estrella estrella-4">✦</div>
+
       <div class="estrella estrella-5">✦</div>
-      <div class="estrella estrella-6">✦</div>
+
 
       <div class="fugaz"></div>
 
     </div>
 
+
     <main class="contenedor">
 
+
       <section class="hero">
+
 
         <h1 class="titulo-curvo">
 
@@ -812,70 +1404,121 @@
 
         </h1>
 
+
         <p class="subtitulo">
+
           La música de Lolo y la Yaya
+
         </p>
 
+
         <div class="separador">
+
           ✦
+
         </div>
 
+
         <div class="lolo-wrap">
+
           <img
             class="lolo"
             src="lolo.png"
             alt="Lolo, héroe intergaláctico"
           >
+
         </div>
+
 
       </section>
 
 
+
       <div class="paisaje">
+
 
         <div class="barraca izquierda">
 
-          <div class="casa"></div>
-          <div class="techo"></div>
+          <div class="pared"></div>
+
+          <div class="tejado"></div>
+
           <div class="puerta"></div>
 
           <div class="ventana ventana-1"></div>
+
           <div class="ventana ventana-2"></div>
 
         </div>
+
 
 
         <div class="barraca derecha">
 
-          <div class="casa"></div>
-          <div class="techo"></div>
+          <div class="pared"></div>
+
+          <div class="tejado"></div>
+
           <div class="puerta"></div>
 
           <div class="ventana ventana-1"></div>
+
           <div class="ventana ventana-2"></div>
 
         </div>
 
 
-        <div class="hierbas izquierda"></div>
-        <div class="hierbas derecha"></div>
+
+        <div class="hierbas izquierda">
+
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+
+        <div class="hierbas derecha">
+
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
 
       </div>
 
 
+
       <section class="canciones">
 
+
         <div class="titulo-seccion">
+
           <span>LAS CANCIONES</span>
+
         </div>
 
 
+
         <div class="lista">
+
 
           <a
             class="cancion"
             href="/por-si-algun-dia/"
           >
+
             <span class="numero">01</span>
 
             <span class="nombre-cancion">
@@ -883,13 +1526,16 @@
             </span>
 
             <span class="flecha">›</span>
+
           </a>
+
 
 
           <a
             class="cancion"
             href="/no-me-aplastes-soy-un-heroe/"
           >
+
             <span class="numero">02</span>
 
             <span class="nombre-cancion">
@@ -897,13 +1543,16 @@
             </span>
 
             <span class="flecha">›</span>
+
           </a>
+
 
 
           <a
             class="cancion"
             href="/basura-con-estilo/"
           >
+
             <span class="numero">03</span>
 
             <span class="nombre-cancion">
@@ -911,28 +1560,33 @@
             </span>
 
             <span class="flecha">›</span>
+
           </a>
+
 
 
           <a
             class="cancion"
             href="/molestar-por-la-noche-dormir-todo-el-dia/"
           >
+
             <span class="numero">04</span>
 
             <span class="nombre-cancion">
-              Molestar por la noche,
-              dormir todo el día
+              Molestar por la noche, dormir todo el día
             </span>
 
             <span class="flecha">›</span>
+
           </a>
+
 
 
           <a
             class="cancion"
             href="/una-espia-intergalactica/"
           >
+
             <span class="numero">05</span>
 
             <span class="nombre-cancion">
@@ -940,13 +1594,16 @@
             </span>
 
             <span class="flecha">›</span>
+
           </a>
+
 
 
           <a
             class="cancion"
             href="/la-leyenda-de-lolo-y-la-yaya/"
           >
+
             <span class="numero">06</span>
 
             <span class="nombre-cancion">
@@ -954,18 +1611,27 @@
             </span>
 
             <span class="flecha">›</span>
+
           </a>
 
+
         </div>
+
 
       </section>
 
 
+
       <footer>
+
         <span>✦</span>
+
         Lolo y la Yaya
+
         <span>✦</span>
+
       </footer>
+
 
     </main>
 
