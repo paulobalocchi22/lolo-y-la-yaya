@@ -7,16 +7,18 @@
   <title>Lolo y la Yaya — La música de Lolo y la Yaya</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
 
     :root {
-      --crema: #f5eddd;
+      --crema: #f3ead8;
       --crema-claro: #fffaf0;
-      --azul: #14659a;
-      --azul-oscuro: #123e63;
-      --dorado: #c89b45;
-      --marron: #593b29;
-      --texto: #293038;
+      --azul: #1673a8;
+      --azul-oscuro: #123f63;
+      --azul-suave: #c8e0e9;
+      --marron: #69452e;
+      --dorado: #c99a51;
+      --verde: #708d67;
+      --texto: #29343a;
     }
 
     * {
@@ -24,289 +26,554 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      min-height: 100%;
+      background-color: #f3ead8;
     }
 
     body {
       margin: 0;
+      min-width: 320px;
       min-height: 100vh;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at 50% 25%, rgba(255,255,255,.65), transparent 32%),
-        linear-gradient(180deg, #f8f0df 0%, #f2e6d0 100%);
+      min-height: 100dvh;
+      background-color: #f3ead8;
       color: var(--texto);
       font-family: "Nunito", sans-serif;
+      overflow-x: hidden;
     }
 
-    /* Textura y patrón */
-    body::before {
-      content: "";
-      position: fixed;
+    /*
+      Esta capa contiene TODO el fondo.
+      Así evitamos que Safari o Chrome móvil muestren
+      negro detrás de body o de elementos fixed.
+    */
+
+    .pagina {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          ellipse at 50% 8%,
+          rgba(255,255,255,.72) 0%,
+          rgba(255,255,255,.22) 28%,
+          transparent 58%
+        ),
+        linear-gradient(
+          180deg,
+          #f8f0df 0%,
+          #f3ead8 52%,
+          #eee0c9 100%
+        );
+    }
+
+    /*
+      PATRÓN DEL FONDO
+    */
+
+    .textura {
+      position: absolute;
       inset: 0;
       pointer-events: none;
-      opacity: .48;
+      opacity: .5;
       background-image:
-        radial-gradient(circle at 2px 2px, rgba(18,62,99,.16) 1px, transparent 1.2px),
-        radial-gradient(circle at 18px 18px, rgba(200,155,69,.12) 1px, transparent 1.2px);
-      background-size: 38px 38px;
+        radial-gradient(
+          circle at 2px 2px,
+          rgba(18,63,99,.14) 1px,
+          transparent 1.2px
+        ),
+        radial-gradient(
+          circle at 18px 18px,
+          rgba(201,154,81,.13) 1px,
+          transparent 1.3px
+        );
+      background-size: 36px 36px;
     }
 
+    .textura-lineas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .2;
+      background:
+        repeating-linear-gradient(
+          115deg,
+          transparent 0px,
+          transparent 72px,
+          rgba(18,63,99,.18) 73px,
+          transparent 74px,
+          transparent 145px
+        );
+    }
+
+    /*
+      UNIVERSO DECORATIVO
+    */
+
     .universo {
-      position: fixed;
+      position: absolute;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
-      z-index: 0;
     }
 
     .orbita {
       position: absolute;
-      border: 1px dashed rgba(18,62,99,.18);
+      width: 135vw;
+      height: 42vw;
+      left: -18vw;
+      top: 130px;
+      border: 1.5px dashed rgba(18,63,99,.22);
       border-radius: 50%;
+      transform: rotate(-10deg);
+    }
+
+    .orbita-2 {
+      position: absolute;
       width: 120vw;
-      height: 34vw;
-      left: -10vw;
-      top: 8vh;
-      transform: rotate(-9deg);
+      height: 35vw;
+      right: -48vw;
+      top: 580px;
+      border: 1px dashed rgba(22,115,168,.18);
+      border-radius: 50%;
+      transform: rotate(14deg);
     }
 
-    .orbita.dos {
+    .orbita-3 {
+      position: absolute;
       width: 110vw;
-      height: 28vw;
-      top: 72vh;
-      left: 5vw;
-      transform: rotate(12deg);
-      opacity: .65;
+      height: 32vw;
+      left: -35vw;
+      bottom: 110px;
+      border: 1px dashed rgba(105,69,46,.14);
+      border-radius: 50%;
+      transform: rotate(-18deg);
     }
 
-    .estrella-fondo {
+    .estrella {
       position: absolute;
       color: var(--azul);
-      opacity: .65;
-      animation: destello 4s ease-in-out infinite;
+      line-height: 1;
+      animation: destellar 4s ease-in-out infinite;
     }
 
-    .e1 { top: 7%; left: 10%; font-size: 16px; }
-    .e2 { top: 16%; right: 11%; font-size: 10px; animation-delay: 1s; }
-    .e3 { top: 36%; left: 7%; font-size: 12px; animation-delay: 2s; }
-    .e4 { top: 55%; right: 8%; font-size: 15px; animation-delay: .6s; }
-    .e5 { top: 77%; left: 13%; font-size: 10px; animation-delay: 2.5s; }
-    .e6 { top: 90%; right: 14%; font-size: 18px; animation-delay: 1.7s; }
+    .estrella-1 {
+      top: 95px;
+      left: 8%;
+      font-size: 18px;
+    }
+
+    .estrella-2 {
+      top: 220px;
+      right: 8%;
+      font-size: 12px;
+      animation-delay: 1s;
+    }
+
+    .estrella-3 {
+      top: 430px;
+      left: 6%;
+      font-size: 15px;
+      animation-delay: 2s;
+    }
+
+    .estrella-4 {
+      top: 680px;
+      right: 7%;
+      font-size: 19px;
+      animation-delay: .5s;
+    }
+
+    .estrella-5 {
+      top: 950px;
+      left: 10%;
+      font-size: 11px;
+      animation-delay: 2.7s;
+    }
+
+    .estrella-6 {
+      bottom: 110px;
+      right: 11%;
+      font-size: 16px;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes destellar {
+      0%, 100% {
+        opacity: .25;
+        transform: scale(.75) rotate(0deg);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(12deg);
+      }
+    }
+
+    /*
+      ESTRELLA FUGAZ
+    */
 
     .fugaz {
       position: absolute;
-      width: 105px;
+      top: 150px;
+      right: 4%;
+      width: 125px;
       height: 2px;
-      border-radius: 20px;
-      background: linear-gradient(90deg, transparent, rgba(20,101,154,.05), rgba(20,101,154,.8));
-      transform: rotate(-42deg);
-      opacity: 0;
-      filter: drop-shadow(0 0 5px rgba(20,101,154,.35));
-      animation: estrellaFugaz 14s linear infinite;
+      border-radius: 10px;
+      opacity: .8;
+      transform: rotate(140deg);
+      transform-origin: right center;
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(22,115,168,.15),
+          rgba(22,115,168,.95)
+        );
+      animation: aparecer-fugaz 11s ease-in-out infinite;
     }
 
     .fugaz::after {
       content: "✦";
       position: absolute;
-      right: -5px;
+      right: -6px;
       top: -9px;
       color: var(--azul);
-      font-size: 15px;
+      font-size: 18px;
     }
 
-    .f1 {
-      top: 13%;
-      left: 4%;
-    }
-
-    .f2 {
-      top: 67%;
-      right: 4%;
-      animation-delay: 7s;
-    }
-
-    @keyframes estrellaFugaz {
-      0%, 10% {
+    @keyframes aparecer-fugaz {
+      0%, 65%, 100% {
         opacity: 0;
-        transform: translateX(0) translateY(0) rotate(-42deg);
+        transform:
+          translate(-40px, -25px)
+          rotate(140deg);
       }
-      12% {
+
+      70% {
         opacity: .9;
       }
-      20% {
-        opacity: 0;
-        transform: translateX(240px) translateY(160px) rotate(-42deg);
+
+      82% {
+        opacity: .9;
+        transform:
+          translate(35px, 30px)
+          rotate(140deg);
       }
-      100% {
+
+      87% {
         opacity: 0;
       }
     }
 
-    @keyframes destello {
-      0%, 100% {
-        opacity: .25;
-        transform: scale(.8);
-      }
-      50% {
-        opacity: .95;
-        transform: scale(1.25);
-      }
-    }
+    /*
+      CONTENIDO
+    */
 
     .contenedor {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: min(100%, 720px);
       margin: 0 auto;
-      padding: 30px 20px 48px;
+      padding: 36px 20px 50px;
     }
 
-    /* HERO */
+    /*
+      TÍTULO CURVO
+    */
 
     .hero {
       text-align: center;
-      padding: 18px 0 24px;
+      padding-top: 8px;
     }
 
-    h1 {
-      margin: 0;
+    .titulo-curvo {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0;
+      margin: 0 auto;
       color: var(--azul-oscuro);
-      font-size: clamp(34px, 8vw, 56px);
+      font-family: "Baloo 2", sans-serif;
+      font-size: clamp(35px, 8.3vw, 58px);
+      font-weight: 800;
       line-height: 1;
-      font-weight: 900;
-      letter-spacing: -1.8px;
-      text-transform: uppercase;
+      letter-spacing: -2.4px;
       white-space: nowrap;
-      transform: perspective(400px) rotateX(7deg);
-      text-shadow: 0 0 20px rgba(20,101,154,.08);
+      text-shadow:
+        0 2px 0 rgba(255,255,255,.5),
+        0 5px 12px rgba(18,63,99,.08);
+    }
+
+    .titulo-curvo span {
+      display: inline-block;
+    }
+
+    /*
+      Curvatura hacia abajo:
+      los extremos quedan más altos
+      y el centro baja ligeramente
+    */
+
+    .titulo-curvo span:nth-child(1) {
+      transform: translateY(0px) rotate(-7deg);
+    }
+
+    .titulo-curvo span:nth-child(2) {
+      transform: translateY(4px) rotate(-5deg);
+    }
+
+    .titulo-curvo span:nth-child(3) {
+      transform: translateY(7px) rotate(-3deg);
+    }
+
+    .titulo-curvo span:nth-child(4) {
+      transform: translateY(10px) rotate(-1deg);
+    }
+
+    .titulo-curvo span:nth-child(5) {
+      transform: translateY(11px);
+    }
+
+    .titulo-curvo span:nth-child(6) {
+      transform: translateY(11px);
+    }
+
+    .titulo-curvo span:nth-child(7) {
+      transform: translateY(11px);
+    }
+
+    .titulo-curvo span:nth-child(8) {
+      transform: translateY(10px) rotate(1deg);
+    }
+
+    .titulo-curvo span:nth-child(9) {
+      transform: translateY(7px) rotate(3deg);
+    }
+
+    .titulo-curvo span:nth-child(10) {
+      transform: translateY(4px) rotate(5deg);
+    }
+
+    .titulo-curvo span:nth-child(11) {
+      transform: translateY(0px) rotate(7deg);
+    }
+
+    .titulo-curvo .espacio {
+      width: .23em;
     }
 
     .subtitulo {
-      margin: 14px 0 0;
+      margin: 24px 0 0;
       color: var(--marron);
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .separador {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 9px;
-      margin: 18px auto 18px;
+      gap: 11px;
+      margin: 17px auto 12px;
       color: var(--azul);
+      font-size: 14px;
     }
 
     .separador::before,
     .separador::after {
       content: "";
-      width: 52px;
+      width: 55px;
       height: 1px;
-      background: var(--azul);
-      opacity: .6;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--azul)
+      );
+      opacity: .65;
     }
 
-    /* LOLO */
-
-    .lolo-wrap {
-      position: relative;
-      width: min(100%, 240px);
-      margin: 0 auto;
-    }
-
-    .lolo {
-      width: 100%;
-      display: block;
-      filter: drop-shadow(0 12px 10px rgba(62,42,25,.16));
+    .separador::after {
+      transform: scaleX(-1);
     }
 
     /*
-      Efecto visual de parpadeo.
-      El círculo crema cubre momentáneamente uno de los ojos.
+      LOLO
     */
 
-    .parpado {
+    .lolo-wrap {
+      position: relative;
+      width: min(100%, 205px);
+      margin: 0 auto;
+      z-index: 3;
+    }
+
+    .lolo {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter:
+        drop-shadow(
+          0 13px 11px rgba(78,48,26,.18)
+        );
+    }
+
+    /*
+      BARRACAS VALENCIANAS
+    */
+
+    .paisaje {
       position: absolute;
-      width: 30px;
-      height: 20px;
-      background: #8c5a33;
-      border-radius: 50%;
-      left: 35%;
-      top: 20%;
-      transform-origin: center top;
-      transform: scaleY(0);
-      animation: parpadeo 9s infinite;
-      z-index: 2;
+      left: 0;
+      right: 0;
+      top: 275px;
+      height: 230px;
+      pointer-events: none;
+      z-index: 1;
     }
-
-    @keyframes parpadeo {
-      0%, 46%, 49%, 100% {
-        transform: scaleY(0);
-      }
-      47%, 48% {
-        transform: scaleY(1);
-      }
-    }
-
-    /* BARRACAS DECORATIVAS */
 
     .barraca {
       position: absolute;
-      width: 78px;
-      height: 54px;
-      opacity: .28;
-      border: 2px solid var(--dorado);
-      border-top: none;
-      bottom: 25%;
-      z-index: -1;
+      bottom: 22px;
+      width: 92px;
+      height: 48px;
+      opacity: .45;
     }
 
-    .barraca::before {
-      content: "";
+    .barraca .casa {
       position: absolute;
-      width: 62px;
-      height: 62px;
-      border-left: 2px solid var(--dorado);
-      border-top: 2px solid var(--dorado);
-      transform: rotate(45deg);
-      top: -34px;
-      left: 6px;
-    }
-
-    .barraca::after {
-      content: "";
-      position: absolute;
-      width: 13px;
-      height: 25px;
-      border: 2px solid var(--dorado);
-      border-bottom: none;
+      left: 9px;
       bottom: 0;
-      left: 29px;
+      width: 74px;
+      height: 45px;
+      border: 1.5px solid var(--dorado);
+      border-top: none;
+      border-radius: 1px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 11px,
+          rgba(201,154,81,.23) 12px,
+          transparent 13px
+        );
+    }
+
+    .barraca .techo {
+      position: absolute;
+      left: 4px;
+      top: -21px;
+      width: 84px;
+      height: 84px;
+      border-top: 1.5px solid var(--dorado);
+      border-left: 1.5px solid var(--dorado);
+      transform: rotate(45deg);
+    }
+
+    .barraca .puerta {
+      position: absolute;
+      bottom: 0;
+      left: 36px;
+      width: 17px;
+      height: 27px;
+      border: 1.5px solid var(--dorado);
+      border-bottom: none;
       border-radius: 8px 8px 0 0;
     }
 
-    .barraca.izq {
-      left: -30px;
-      top: 300px;
+    .barraca .ventana {
+      position: absolute;
+      bottom: 19px;
+      width: 9px;
+      height: 10px;
+      border: 1px solid var(--dorado);
+    }
+
+    .barraca .ventana-1 {
+      left: 19px;
+    }
+
+    .barraca .ventana-2 {
+      right: 18px;
+    }
+
+    .barraca.izquierda {
+      left: -18px;
+      transform: scale(.92);
+    }
+
+    .barraca.derecha {
+      right: -22px;
+      bottom: 5px;
       transform: scale(.72);
+      opacity: .36;
     }
 
-    .barraca.der {
+    /*
+      HIERBAS
+    */
+
+    .hierbas {
+      position: absolute;
+      bottom: 0;
+      width: 125px;
+      height: 90px;
+      opacity: .5;
+    }
+
+    .hierbas::before,
+    .hierbas::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 2px;
+      height: 74px;
+      background: var(--verde);
+      transform-origin: bottom;
+      box-shadow:
+        10px -7px 0 -0.5px var(--verde),
+        21px 2px 0 -0.5px var(--verde),
+        34px -15px 0 -0.5px var(--verde),
+        48px -3px 0 -0.5px var(--verde),
+        64px -22px 0 -0.5px var(--verde),
+        78px -5px 0 -0.5px var(--verde),
+        94px -17px 0 -0.5px var(--verde);
+    }
+
+    .hierbas::before {
+      transform: rotate(-14deg);
+    }
+
+    .hierbas::after {
+      transform: rotate(14deg);
+      left: 18px;
+      opacity: .75;
+    }
+
+    .hierbas.izquierda {
+      left: -15px;
+    }
+
+    .hierbas.derecha {
       right: -30px;
-      top: 390px;
-      transform: scale(.58);
+      transform: scaleX(-1);
     }
 
-    /* CANCIONES */
+    /*
+      CANCIONES
+    */
 
     .canciones {
-      margin-top: 14px;
+      position: relative;
+      z-index: 4;
+      margin-top: 12px;
     }
 
     .titulo-seccion {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       gap: 13px;
       margin-bottom: 16px;
     }
@@ -314,17 +581,16 @@
     .titulo-seccion::before,
     .titulo-seccion::after {
       content: "";
-      width: 55px;
-      border-top: 1px dotted rgba(18,62,99,.55);
+      width: 54px;
+      border-top: 1px dotted rgba(18,63,99,.65);
     }
 
     .titulo-seccion span {
       color: var(--azul-oscuro);
-      font-family: "DM Mono", monospace;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      white-space: nowrap;
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
     }
 
     .lista {
@@ -336,23 +602,38 @@
     .cancion {
       display: flex;
       align-items: center;
-      width: 100%;
-      min-height: 68px;
-      padding: 13px 16px;
+      min-height: 70px;
+      padding: 14px 17px;
       text-decoration: none;
       color: var(--texto);
-      background: rgba(255,250,240,.63);
-      border: 1px solid rgba(18,62,99,.18);
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(83,62,35,.06);
-      backdrop-filter: blur(3px);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+
+      background:
+        linear-gradient(
+          120deg,
+          rgba(255,252,245,.88),
+          rgba(255,248,235,.65)
+        );
+
+      border: 1px solid rgba(18,63,99,.16);
+      border-radius: 16px;
+
+      box-shadow:
+        0 4px 0 rgba(18,63,99,.05),
+        0 8px 20px rgba(86,58,36,.06);
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
     }
 
     .cancion:hover {
       transform: translateY(-2px);
-      background: rgba(255,253,247,.88);
-      box-shadow: 0 9px 22px rgba(18,62,99,.10);
+      background: rgba(255,253,248,.95);
+
+      box-shadow:
+        0 5px 0 rgba(18,63,99,.06),
+        0 12px 24px rgba(18,63,99,.11);
     }
 
     .cancion:active {
@@ -362,160 +643,333 @@
     .numero {
       flex: 0 0 42px;
       color: var(--azul);
-      font-family: "DM Mono", monospace;
-      font-size: 13px;
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .nombre-cancion {
       flex: 1;
-      padding-right: 8px;
+      padding-right: 10px;
       font-size: 17px;
       line-height: 1.25;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .flecha {
-      flex: 0 0 24px;
+      flex: 0 0 22px;
       color: var(--azul);
-      font-size: 26px;
+      font-size: 27px;
+      line-height: 1;
       text-align: right;
     }
 
+    /*
+      FOOTER
+    */
+
     footer {
+      position: relative;
+      z-index: 3;
       margin-top: 42px;
       text-align: center;
-      color: var(--marron);
-      font-size: 14px;
-      font-weight: 700;
+      color: rgba(105,69,46,.72);
+      font-size: 13px;
+      font-weight: 800;
     }
 
     footer span {
+      margin: 0 8px;
       color: var(--azul);
-      margin: 0 7px;
     }
 
-    @media (max-width: 430px) {
-      h1 {
-        font-size: clamp(31px, 9vw, 40px);
-        letter-spacing: -1.5px;
-      }
+    /*
+      MÓVIL
+    */
+
+    @media (max-width: 480px) {
 
       .contenedor {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding:
+          28px 16px
+          46px;
+      }
+
+      .titulo-curvo {
+        font-size: 9vw;
+        letter-spacing: -1.8px;
+      }
+
+      .subtitulo {
+        margin-top: 22px;
+        font-size: 16px;
       }
 
       .lolo-wrap {
-        width: 215px;
+        width: 190px;
       }
 
-      .barraca.izq {
-        left: -43px;
+      .paisaje {
+        top: 255px;
       }
 
-      .barraca.der {
-        right: -43px;
+      .barraca.izquierda {
+        left: -39px;
+        transform: scale(.78);
+      }
+
+      .barraca.derecha {
+        right: -42px;
+        transform: scale(.61);
+      }
+
+      .hierbas.izquierda {
+        left: -55px;
+        transform: scale(.8);
+      }
+
+      .hierbas.derecha {
+        right: -65px;
+        transform:
+          scaleX(-1)
+          scale(.8);
+      }
+
+      .nombre-cancion {
+        font-size: 16px;
+      }
+
+      .orbita {
+        width: 180vw;
+        height: 65vw;
+        left: -45vw;
+      }
+
+      .orbita-2 {
+        width: 160vw;
+        height: 58vw;
+      }
+
+      .fugaz {
+        top: 125px;
+        right: -25px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
-  <div class="universo">
-    <div class="orbita"></div>
-    <div class="orbita dos"></div>
+  <div class="pagina">
 
-    <span class="estrella-fondo e1">✦</span>
-    <span class="estrella-fondo e2">✦</span>
-    <span class="estrella-fondo e3">✦</span>
-    <span class="estrella-fondo e4">✦</span>
-    <span class="estrella-fondo e5">✦</span>
-    <span class="estrella-fondo e6">✦</span>
+    <div class="textura"></div>
+    <div class="textura-lineas"></div>
 
-    <div class="fugaz f1"></div>
-    <div class="fugaz f2"></div>
+    <div class="universo">
+
+      <div class="orbita"></div>
+      <div class="orbita-2"></div>
+      <div class="orbita-3"></div>
+
+      <div class="estrella estrella-1">✦</div>
+      <div class="estrella estrella-2">✦</div>
+      <div class="estrella estrella-3">✦</div>
+      <div class="estrella estrella-4">✦</div>
+      <div class="estrella estrella-5">✦</div>
+      <div class="estrella estrella-6">✦</div>
+
+      <div class="fugaz"></div>
+
+    </div>
+
+    <main class="contenedor">
+
+      <section class="hero">
+
+        <h1 class="titulo-curvo">
+
+          <span>L</span>
+          <span>o</span>
+          <span>l</span>
+          <span>o</span>
+
+          <span class="espacio"></span>
+
+          <span>y</span>
+
+          <span class="espacio"></span>
+
+          <span>l</span>
+          <span>a</span>
+
+          <span class="espacio"></span>
+
+          <span>Y</span>
+          <span>a</span>
+          <span>y</span>
+          <span>a</span>
+
+        </h1>
+
+        <p class="subtitulo">
+          La música de Lolo y la Yaya
+        </p>
+
+        <div class="separador">
+          ✦
+        </div>
+
+        <div class="lolo-wrap">
+          <img
+            class="lolo"
+            src="lolo.png"
+            alt="Lolo, héroe intergaláctico"
+          >
+        </div>
+
+      </section>
+
+
+      <div class="paisaje">
+
+        <div class="barraca izquierda">
+
+          <div class="casa"></div>
+          <div class="techo"></div>
+          <div class="puerta"></div>
+
+          <div class="ventana ventana-1"></div>
+          <div class="ventana ventana-2"></div>
+
+        </div>
+
+
+        <div class="barraca derecha">
+
+          <div class="casa"></div>
+          <div class="techo"></div>
+          <div class="puerta"></div>
+
+          <div class="ventana ventana-1"></div>
+          <div class="ventana ventana-2"></div>
+
+        </div>
+
+
+        <div class="hierbas izquierda"></div>
+        <div class="hierbas derecha"></div>
+
+      </div>
+
+
+      <section class="canciones">
+
+        <div class="titulo-seccion">
+          <span>LAS CANCIONES</span>
+        </div>
+
+
+        <div class="lista">
+
+          <a
+            class="cancion"
+            href="/por-si-algun-dia/"
+          >
+            <span class="numero">01</span>
+
+            <span class="nombre-cancion">
+              Por si algún día
+            </span>
+
+            <span class="flecha">›</span>
+          </a>
+
+
+          <a
+            class="cancion"
+            href="/no-me-aplastes-soy-un-heroe/"
+          >
+            <span class="numero">02</span>
+
+            <span class="nombre-cancion">
+              No me aplastes, soy un héroe
+            </span>
+
+            <span class="flecha">›</span>
+          </a>
+
+
+          <a
+            class="cancion"
+            href="/basura-con-estilo/"
+          >
+            <span class="numero">03</span>
+
+            <span class="nombre-cancion">
+              Basura con estilo
+            </span>
+
+            <span class="flecha">›</span>
+          </a>
+
+
+          <a
+            class="cancion"
+            href="/molestar-por-la-noche-dormir-todo-el-dia/"
+          >
+            <span class="numero">04</span>
+
+            <span class="nombre-cancion">
+              Molestar por la noche,
+              dormir todo el día
+            </span>
+
+            <span class="flecha">›</span>
+          </a>
+
+
+          <a
+            class="cancion"
+            href="/una-espia-intergalactica/"
+          >
+            <span class="numero">05</span>
+
+            <span class="nombre-cancion">
+              Una espía intergaláctica
+            </span>
+
+            <span class="flecha">›</span>
+          </a>
+
+
+          <a
+            class="cancion"
+            href="/la-leyenda-de-lolo-y-la-yaya/"
+          >
+            <span class="numero">06</span>
+
+            <span class="nombre-cancion">
+              La leyenda de Lolo y la Yaya
+            </span>
+
+            <span class="flecha">›</span>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <footer>
+        <span>✦</span>
+        Lolo y la Yaya
+        <span>✦</span>
+      </footer>
+
+    </main>
+
   </div>
-
-  <main class="contenedor">
-
-    <div class="barraca izq"></div>
-    <div class="barraca der"></div>
-
-    <section class="hero">
-
-      <h1>Lolo y la Yaya</h1>
-
-      <p class="subtitulo">La música de Lolo y la Yaya</p>
-
-      <div class="separador">✦</div>
-
-      <div class="lolo-wrap">
-        <img
-          class="lolo"
-          src="lolo.png"
-          alt="Lolo, héroe intergaláctico"
-        >
-        <div class="parpado"></div>
-      </div>
-
-    </section>
-
-    <section class="canciones">
-
-      <div class="titulo-seccion">
-        <span>LAS CANCIONES</span>
-      </div>
-
-      <div class="lista">
-
-        <a class="cancion" href="/por-si-algun-dia/">
-          <span class="numero">01</span>
-          <span class="nombre-cancion">Por si algún día</span>
-          <span class="flecha">›</span>
-        </a>
-
-        <a class="cancion" href="/no-me-aplastes-soy-un-heroe/">
-          <span class="numero">02</span>
-          <span class="nombre-cancion">No me aplastes, soy un héroe</span>
-          <span class="flecha">›</span>
-        </a>
-
-        <a class="cancion" href="/basura-con-estilo/">
-          <span class="numero">03</span>
-          <span class="nombre-cancion">Basura con estilo</span>
-          <span class="flecha">›</span>
-        </a>
-
-        <a class="cancion" href="/molestar-por-la-noche-dormir-todo-el-dia/">
-          <span class="numero">04</span>
-          <span class="nombre-cancion">Molestar por la noche, dormir todo el día</span>
-          <span class="flecha">›</span>
-        </a>
-
-        <a class="cancion" href="/una-espia-intergalactica/">
-          <span class="numero">05</span>
-          <span class="nombre-cancion">Una espía intergaláctica</span>
-          <span class="flecha">›</span>
-        </a>
-
-        <a class="cancion" href="/la-leyenda-de-lolo-y-la-yaya/">
-          <span class="numero">06</span>
-          <span class="nombre-cancion">La leyenda de Lolo y la Yaya</span>
-          <span class="flecha">›</span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <footer>
-      <span>✦</span>
-      Lolo y la Yaya
-      <span>✦</span>
-    </footer>
-
-  </main>
 
 </body>
 </html>
