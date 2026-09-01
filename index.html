@@ -3,23 +3,35 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- Importante para móviles -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="color-scheme" content="light">
 
   <title>Lolo y la Yaya | La música</title>
 
-  <meta name="description" content="La música de Lolo y la Yaya">
+  <meta
+    name="description"
+    content="La música de Lolo y la Yaya"
+  >
 
   <style>
-    /*
-      FORZAMOS EL MODO CLARO.
 
-      Esto evita que algunos navegadores Android intenten
-      convertir el fondo crema en negro automáticamente.
-    */
+    /* ================================
+       BASE
+    ================================= */
+
     :root {
       color-scheme: light only;
-      background: #f6ecd4;
+
+      --crema: #f4eedf;
+      --crema-claro: #faf6eb;
+      --azul: #123e68;
+      --azul-suave: #2d628e;
+      --texto: #3c352e;
+      --dorado: #b88a3b;
     }
 
     * {
@@ -27,217 +39,959 @@
     }
 
     html {
-      background: #f6ecd4 !important;
-      color-scheme: light !important;
       min-height: 100%;
+      background: var(--crema) !important;
+      color-scheme: light !important;
     }
 
     body {
       margin: 0;
-      padding: 0;
+      min-width: 100%;
       min-height: 100vh;
       min-height: 100dvh;
 
-      background: #f6ecd4 !important;
+      overflow-x: hidden;
 
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      background-color: var(--crema) !important;
+      color: var(--texto);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
       -webkit-text-size-adjust: 100%;
     }
 
-    /*
-      CONTENEDOR PRINCIPAL
 
-      La imagen mantiene siempre sus proporciones originales.
-    */
-    .site {
+    /* ================================
+       FONDO
+    ================================= */
+
+    .page {
+
       position: relative;
+
+      min-height: 100vh;
+      min-height: 100dvh;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          rgba(255,255,255,0.72) 0%,
+          rgba(255,255,255,0.28) 30%,
+          transparent 60%
+        ),
+
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(255,255,255,0.45),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 85% 70%,
+          rgba(255,255,255,0.32),
+          transparent 30%
+        ),
+
+        var(--crema);
+
+    }
+
+
+    /*
+      Textura muy sutil.
+
+      Son pequeños puntos casi invisibles
+      para evitar que el fondo parezca plano.
+    */
+
+    .page::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+        radial-gradient(
+          rgba(81, 66, 45, 0.35) 0.7px,
+          transparent 0.8px
+        );
+
+      background-size: 17px 17px;
+
+      z-index: 0;
+
+    }
+
+
+    /* ================================
+       ESTRELLAS
+    ================================= */
+
+    .stars {
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 1;
+
+      background-image:
+
+        radial-gradient(
+          circle,
+          rgba(20,62,104,0.75) 1px,
+          transparent 1.8px
+        ),
+
+        radial-gradient(
+          circle,
+          rgba(184,138,59,0.55) 1px,
+          transparent 2px
+        );
+
+      background-size:
+        137px 173px,
+        211px 197px;
+
+      background-position:
+        12px 30px,
+        90px 80px;
+
+      opacity: 0.55;
+
+    }
+
+
+    .star {
+
+      position: absolute;
+
+      color: var(--azul);
+
+      font-size: 24px;
+
+      line-height: 1;
+
+      opacity: 0.65;
+
+      animation: twinkle 5s ease-in-out infinite;
+
+    }
+
+    .star::before {
+      content: "✦";
+    }
+
+    .star.one {
+      top: 9%;
+      left: 8%;
+      font-size: 20px;
+    }
+
+    .star.two {
+      top: 16%;
+      right: 11%;
+      font-size: 30px;
+      animation-delay: 1s;
+    }
+
+    .star.three {
+      top: 48%;
+      left: 6%;
+      font-size: 18px;
+      animation-delay: 2.2s;
+    }
+
+    .star.four {
+      top: 67%;
+      right: 7%;
+      font-size: 25px;
+      animation-delay: 3.1s;
+    }
+
+    .star.five {
+      bottom: 10%;
+      left: 13%;
+      font-size: 18px;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes twinkle {
+
+      0%, 100% {
+        opacity: 0.35;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 0.85;
+        transform: scale(1.12);
+      }
+
+    }
+
+
+    /* ================================
+       CONTENIDO PRINCIPAL
+    ================================= */
+
+    .content {
+
+      position: relative;
+
+      z-index: 5;
+
       width: 100%;
-      max-width: 653px;
+
+      max-width: 1180px;
 
       margin: 0 auto;
 
-      line-height: 0;
-      overflow: hidden;
+      padding:
+        55px
+        40px
+        70px;
 
-      background: #f6ecd4;
+      text-align: center;
+
     }
 
-    /*
-      IMAGEN DE ESCRITORIO
-    */
-    .desktop-image {
+
+    /* ================================
+       CABECERA
+    ================================= */
+
+    .hero {
+
+      position: relative;
+
+      z-index: 5;
+
+    }
+
+
+    .title {
+
+      margin: 0;
+
+      color: var(--azul);
+
+      font-family:
+        Arial Black,
+        Arial,
+        sans-serif;
+
+      font-size: clamp(48px, 7vw, 96px);
+
+      font-weight: 900;
+
+      letter-spacing: 0.03em;
+
+      line-height: 1;
+
+      text-transform: uppercase;
+
+      transform: rotate(-2deg);
+
+      text-shadow:
+        1px 2px 0 rgba(255,255,255,0.4);
+
+    }
+
+
+    .subtitle {
+
+      margin:
+        22px
+        0
+        0;
+
+      color: var(--texto);
+
+      font-size: clamp(20px, 2.2vw, 30px);
+
+      font-weight: 500;
+
+      letter-spacing: 0.03em;
+
+    }
+
+
+    .ornament {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 16px;
+
+      margin-top: 28px;
+
+      color: var(--azul);
+
+      opacity: 0.8;
+
+    }
+
+    .ornament::before,
+    .ornament::after {
+
+      content: "";
+
+      width: 75px;
+
+      height: 1px;
+
+      background: var(--azul);
+
+      opacity: 0.7;
+
+    }
+
+    .ornament span {
+
+      font-size: 24px;
+
+      line-height: 1;
+
+    }
+
+
+    /* ================================
+       LOLO
+    ================================= */
+
+    .lolo-zone {
+
+      position: relative;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      min-height: 430px;
+
+      margin-top: 10px;
+
+    }
+
+
+    .lolo {
+
+      position: relative;
+
+      z-index: 4;
+
       display: block;
-      width: 100%;
+
+      width: min(360px, 42vw);
+
       height: auto;
+
+      filter:
+        drop-shadow(
+          0 16px 16px
+          rgba(68, 53, 34, 0.12)
+        );
+
     }
 
-    /*
-      IMAGEN MÓVIL
 
-      Oculta por defecto.
-    */
-    .mobile-image {
-      display: none;
-      width: 100%;
-      height: auto;
-    }
+    /* ================================
+       DECORACIÓN ALBUFERA
+    ================================= */
 
-    /*
-      ENLACES DE LAS CANCIONES
+    .house {
 
-      Son zonas transparentes situadas exactamente
-      sobre las tarjetas de la ilustración.
-    */
-    .song-link {
       position: absolute;
-      z-index: 10;
 
-      display: block;
+      z-index: 2;
+
+      width: clamp(180px, 19vw, 270px);
+
+      height: auto;
+
+      opacity: 0.78;
+
+      pointer-events: none;
+
+    }
+
+    .house.left {
+
+      left: 2%;
+
+      bottom: 8%;
+
+    }
+
+    .house.right {
+
+      right: 2%;
+
+      bottom: 8%;
+
+      transform: scaleX(-1);
+
+    }
+
+
+    .grass {
+
+      position: absolute;
+
+      z-index: 3;
+
+      width: clamp(100px, 13vw, 180px);
+
+      height: auto;
+
+      opacity: 0.8;
+
+      pointer-events: none;
+
+    }
+
+    .grass.left {
+
+      left: 14%;
+
+      bottom: 4%;
+
+    }
+
+    .grass.right {
+
+      right: 14%;
+
+      bottom: 4%;
+
+      transform: scaleX(-1);
+
+    }
+
+
+    /* ================================
+       SECCIÓN CANCIONES
+    ================================= */
+
+    .songs-section {
+
+      position: relative;
+
+      z-index: 6;
+
+      width: min(100%, 760px);
+
+      margin:
+        10px
+        auto
+        0;
+
+    }
+
+
+    .songs-title {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 18px;
+
+      margin:
+        0
+        0
+        26px;
+
+      color: var(--azul);
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      letter-spacing: 0.28em;
+
+      text-transform: uppercase;
+
+    }
+
+    .songs-title::before,
+    .songs-title::after {
+
+      content: "";
+
+      width: 70px;
+
+      border-top:
+        1px dotted
+        rgba(18,62,104,0.65);
+
+    }
+
+
+    /* ================================
+       LISTA DE CANCIONES
+    ================================= */
+
+    .songs {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
+
+    .song {
+
+      display: grid;
+
+      grid-template-columns:
+        65px
+        1fr
+        30px;
+
+      align-items: center;
+
+      min-height: 78px;
+
+      padding:
+        12px
+        22px;
+
+      border:
+        1px solid
+        rgba(141, 111, 70, 0.26);
 
       border-radius: 18px;
 
+      background:
+        rgba(255,255,255,0.24);
+
+      box-shadow:
+        0 6px 18px
+        rgba(91, 70, 40, 0.05);
+
+      color: var(--texto);
+
       text-decoration: none;
 
+      text-align: left;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
       -webkit-tap-highlight-color: transparent;
-    }
 
-    /*
-      Pequeño efecto profesional al tocar/pasar por una canción.
-      No modifica el diseño visual original.
-    */
-    .song-link:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .song-link:active {
-      background: rgba(20, 58, 100, 0.08);
     }
 
 
-    /* =========================================
-       POSICIONES - VERSIÓN ESCRITORIO
-       ========================================= */
+    .song:hover {
 
-    .song-1 {
-      left: 14%;
-      width: 72%;
-      top: 65.2%;
-      height: 4.8%;
-    }
+      transform: translateY(-2px);
 
-    .song-2 {
-      left: 14%;
-      width: 72%;
-      top: 70.1%;
-      height: 4.8%;
-    }
+      background:
+        rgba(255,255,255,0.48);
 
-    .song-3 {
-      left: 14%;
-      width: 72%;
-      top: 75%;
-      height: 4.8%;
-    }
+      box-shadow:
+        0 10px 25px
+        rgba(91, 70, 40, 0.1);
 
-    .song-4 {
-      left: 14%;
-      width: 72%;
-      top: 79.9%;
-      height: 5.5%;
-    }
-
-    .song-5 {
-      left: 14%;
-      width: 72%;
-      top: 85.4%;
-      height: 4.8%;
-    }
-
-    .song-6 {
-      left: 14%;
-      width: 72%;
-      top: 90.3%;
-      height: 4.8%;
     }
 
 
-    /* =========================================
-       VERSIÓN MÓVIL
-       ========================================= */
+    .song:active {
+
+      transform: scale(0.99);
+
+    }
+
+
+    .number {
+
+      color: var(--azul);
+
+      font-family:
+        "Courier New",
+        monospace;
+
+      font-size: 18px;
+
+      letter-spacing: 0.08em;
+
+    }
+
+
+    .song-name {
+
+      font-size: clamp(18px, 2vw, 23px);
+
+      font-weight: 500;
+
+      line-height: 1.25;
+
+    }
+
+
+    .arrow {
+
+      color: var(--azul);
+
+      font-size: 38px;
+
+      font-weight: 300;
+
+      line-height: 1;
+
+      text-align: right;
+
+    }
+
+
+    /* ================================
+       PIE
+    ================================= */
+
+    .footer {
+
+      position: relative;
+
+      z-index: 5;
+
+      margin-top: 42px;
+
+      color: var(--texto);
+
+      font-size: 18px;
+
+      letter-spacing: 0.04em;
+
+    }
+
+    .footer span {
+
+      margin:
+        0
+        10px;
+
+      color: var(--azul);
+
+    }
+
+
+    /* ================================
+       MÓVIL
+    ================================= */
 
     @media (max-width: 700px) {
 
       body {
-        width: 100%;
-        overflow-x: hidden;
-        background: #f6ecd4 !important;
-      }
 
-      .site {
-        width: 100%;
-        max-width: 430px;
-        background: #f6ecd4 !important;
-      }
+        background: var(--crema) !important;
 
-      .desktop-image {
-        display: none;
-      }
-
-      .mobile-image {
-        display: block;
-        width: 100%;
-        height: auto;
       }
 
 
-      /*
-        Reposicionamos los enlaces sobre las tarjetas
-        de la versión vertical.
-      */
+      .page {
 
-      .song-1 {
-        left: 3%;
-        width: 94%;
-        top: 63.7%;
-        height: 5.4%;
+        min-height: 100dvh;
+
+        background:
+          radial-gradient(
+            circle at 50% 30%,
+            rgba(255,255,255,0.8),
+            transparent 38%
+          ),
+
+          radial-gradient(
+            circle at 15% 80%,
+            rgba(255,255,255,0.35),
+            transparent 25%
+          ),
+
+          var(--crema);
+
       }
 
-      .song-2 {
-        left: 3%;
-        width: 94%;
-        top: 69.2%;
-        height: 5.4%;
+
+      .content {
+
+        padding:
+          38px
+          18px
+          55px;
+
       }
 
-      .song-3 {
-        left: 3%;
-        width: 94%;
-        top: 74.7%;
-        height: 5.4%;
+
+      .title {
+
+        font-size:
+          clamp(34px, 10.5vw, 48px);
+
+        letter-spacing: 0.01em;
+
+        white-space: nowrap;
+
+        transform: rotate(-2deg);
+
       }
 
-      .song-4 {
-        left: 3%;
-        width: 94%;
-        top: 80.2%;
-        height: 5.4%;
+
+      .subtitle {
+
+        margin-top: 18px;
+
+        font-size: 18px;
+
       }
 
-      .song-5 {
-        left: 3%;
-        width: 94%;
-        top: 85.7%;
-        height: 5.4%;
+
+      .ornament {
+
+        margin-top: 20px;
+
       }
 
-      .song-6 {
-        left: 3%;
-        width: 94%;
-        top: 91.2%;
-        height: 5.4%;
+      .ornament::before,
+      .ornament::after {
+
+        width: 45px;
+
+      }
+
+
+      /* LOLO + PAISAJE */
+
+      .lolo-zone {
+
+        min-height: 400px;
+
+        margin-top: 0;
+
+      }
+
+
+      .lolo {
+
+        width: min(310px, 72vw);
+
+      }
+
+
+      .house {
+
+        width: 115px;
+
+        opacity: 0.68;
+
+      }
+
+
+      .house.left {
+
+        left: -18px;
+
+        bottom: 8%;
+
+      }
+
+
+      .house.right {
+
+        right: -18px;
+
+        bottom: 8%;
+
+      }
+
+
+      .grass {
+
+        width: 85px;
+
+        opacity: 0.75;
+
+      }
+
+
+      .grass.left {
+
+        left: 7%;
+
+        bottom: 3%;
+
+      }
+
+
+      .grass.right {
+
+        right: 7%;
+
+        bottom: 3%;
+
+      }
+
+
+      /* CANCIONES */
+
+      .songs-section {
+
+        margin-top: 0;
+
+      }
+
+
+      .songs-title {
+
+        gap: 10px;
+
+        margin-bottom: 20px;
+
+        font-size: 15px;
+
+        letter-spacing: 0.22em;
+
+      }
+
+
+      .songs-title::before,
+      .songs-title::after {
+
+        width: 38px;
+
+      }
+
+
+      .songs {
+
+        gap: 8px;
+
+      }
+
+
+      .song {
+
+        grid-template-columns:
+          48px
+          1fr
+          25px;
+
+        min-height: 72px;
+
+        padding:
+          11px
+          16px;
+
+        border-radius: 16px;
+
+        background:
+          rgba(255,255,255,0.30);
+
+      }
+
+
+      .number {
+
+        font-size: 16px;
+
+      }
+
+
+      .song-name {
+
+        font-size: 18px;
+
+      }
+
+
+      .arrow {
+
+        font-size: 32px;
+
+      }
+
+
+      .footer {
+
+        margin-top: 32px;
+
+        font-size: 16px;
+
+      }
+
+    }
+
+
+    /* ================================
+       PANTALLAS MUY PEQUEÑAS
+    ================================= */
+
+    @media (max-width: 360px) {
+
+      .title {
+
+        font-size: 32px;
+
+      }
+
+      .song-name {
+
+        font-size: 16px;
+
+      }
+
+      .lolo-zone {
+
+        min-height: 360px;
+
+      }
+
+    }
+
+
+    /* ================================
+       ACCESIBILIDAD
+    ================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+
       }
 
     }
@@ -248,89 +1002,209 @@
 
 <body>
 
-  <main class="site">
+  <div class="page">
 
-    <!--
-      IMAGEN PARA ORDENADOR
-    -->
-    <img
-      src="lolo-home-desktop.png"
-      alt="Lolo y la Yaya - La música"
-      class="desktop-image"
-    >
+    <div class="stars"></div>
 
-
-    <!--
-      IMAGEN PARA MÓVIL
-    -->
-    <img
-      src="lolo-home-mobile.png"
-      alt="Lolo y la Yaya - La música"
-      class="mobile-image"
-    >
+    <div class="star one"></div>
+    <div class="star two"></div>
+    <div class="star three"></div>
+    <div class="star four"></div>
+    <div class="star five"></div>
 
 
-    <!--
-      ==================================================
-      ENLACES DE LAS CANCIONES
-      ==================================================
-
-      De momento llevan a "#" porque las páginas todavía
-      no existen.
-
-      Más adelante cambiaremos cada href por su URL definitiva.
-    -->
+    <main class="content">
 
 
-    <!-- 01 -->
-    <a
-      href="#"
-      class="song-link song-1"
-      aria-label="Por si algún día"
-    ></a>
+      <!-- CABECERA -->
+
+      <header class="hero">
+
+        <h1 class="title">
+          Lolo y la Yaya
+        </h1>
+
+        <p class="subtitle">
+          La música de Lolo y la Yaya
+        </p>
+
+        <div class="ornament">
+          <span>✦</span>
+        </div>
+
+      </header>
 
 
-    <!-- 02 -->
-    <a
-      href="#"
-      class="song-link song-2"
-      aria-label="No me aplastes, soy un héroe"
-    ></a>
+      <!-- LOLO Y PAISAJE -->
+
+      <section class="lolo-zone">
+
+        <img
+          src="House.png"
+          alt=""
+          class="house left"
+          aria-hidden="true"
+        >
+
+        <img
+          src="House.png"
+          alt=""
+          class="house right"
+          aria-hidden="true"
+        >
+
+        <img
+          src="hierba.png"
+          alt=""
+          class="grass left"
+          aria-hidden="true"
+        >
+
+        <img
+          src="hierba.png"
+          alt=""
+          class="grass right"
+          aria-hidden="true"
+        >
+
+        <img
+          src="lolo.png"
+          alt="Lolo"
+          class="lolo"
+        >
+
+      </section>
 
 
-    <!-- 03 -->
-    <a
-      href="#"
-      class="song-link song-3"
-      aria-label="Basura con estilo"
-    ></a>
+      <!-- CANCIONES -->
+
+      <section class="songs-section">
+
+        <h2 class="songs-title">
+          Las canciones
+        </h2>
 
 
-    <!-- 04 -->
-    <a
-      href="#"
-      class="song-link song-4"
-      aria-label="Molestar por la noche, dormir todo el día"
-    ></a>
+        <div class="songs">
 
 
-    <!-- 05 -->
-    <a
-      href="#"
-      class="song-link song-5"
-      aria-label="Una espía intergaláctica"
-    ></a>
+          <a
+            class="song"
+            href="/por-si-algun-dia/"
+          >
+
+            <span class="number">01</span>
+
+            <span class="song-name">
+              Por si algún día
+            </span>
+
+            <span class="arrow">›</span>
+
+          </a>
 
 
-    <!-- 06 -->
-    <a
-      href="#"
-      class="song-link song-6"
-      aria-label="La leyenda de Lolo y la Yaya"
-    ></a>
+          <a
+            class="song"
+            href="/no-me-aplastes-soy-un-heroe/"
+          >
+
+            <span class="number">02</span>
+
+            <span class="song-name">
+              No me aplastes, soy un héroe
+            </span>
+
+            <span class="arrow">›</span>
+
+          </a>
 
 
-  </main>
+          <a
+            class="song"
+            href="/basura-con-estilo/"
+          >
+
+            <span class="number">03</span>
+
+            <span class="song-name">
+              Basura con estilo
+            </span>
+
+            <span class="arrow">›</span>
+
+          </a>
+
+
+          <a
+            class="song"
+            href="/molestar-por-la-noche-dormir-todo-el-dia/"
+          >
+
+            <span class="number">04</span>
+
+            <span class="song-name">
+              Molestar por la noche, dormir todo el día
+            </span>
+
+            <span class="arrow">›</span>
+
+          </a>
+
+
+          <a
+            class="song"
+            href="/una-espia-intergalactica/"
+          >
+
+            <span class="number">05</span>
+
+            <span class="song-name">
+              Una espía intergaláctica
+            </span>
+
+            <span class="arrow">›</span>
+
+          </a>
+
+
+          <a
+            class="song"
+            href="/la-leyenda-de-lolo-y-la-yaya/"
+          >
+
+            <span class="number">06</span>
+
+            <span class="song-name">
+              La leyenda de Lolo y la Yaya
+            </span>
+
+            <span class="arrow">›</span>
+
+          </a>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- PIE -->
+
+      <footer class="footer">
+
+        <span>✦</span>
+
+        Lolo y la Yaya
+
+        <span>✦</span>
+
+      </footer>
+
+
+    </main>
+
+  </div>
 
 </body>
 </html>
